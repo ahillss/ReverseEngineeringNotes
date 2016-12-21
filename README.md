@@ -68,7 +68,7 @@ If you are reverse engineering an executable you can look for the **main** funct
 
 ## Inserting code
 
-The easiest way to reverse engineer a binary is to replicate the code (starting with the main/root function) in your own shared library. This can be done in assembly or C/C++ or both. Then have the binary file load it at runtime.
+The easiest way to reverse engineer a binary is to replicate the code bit by bit (starting with the main/root function) in your own shared library. This can be done in assembly or C/C++ or both. Then have the binary file load it at runtime.
 
 The [OpenRCT](https://openrct2.org/) project [used](http://archive.is/SDuL0) a program called [CFF Explorer](http://www.ntcore.com/exsuite.php) to load their DLL. Though in this tutorial I will inserting my own code into the binary to load the shared library.
 
