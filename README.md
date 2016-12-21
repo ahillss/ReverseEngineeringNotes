@@ -74,6 +74,8 @@ The [OpenRCT](https://openrct2.org/) project [used](http://archive.is/SDuL0) a p
 
 The first problem is that you cannot change the size of the binary file, otherwise it will throw off all the memory addresses used. So we will need to make some room by overwriting the existing code which is the second problem. You can either identify some unecessary code or you can find some simple code that can be easily replicated in your shared library.
 
+I will be using the **dlfcn.h** library. I've only used this on Linux and I am not sure if it is available on Windows/WIN32.
+
 The code you will be inserting will be this:
 
 ```asm
