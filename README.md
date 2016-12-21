@@ -119,7 +119,7 @@ The same code in assembly, but with a few minor tweaks:
 	call   dlsym
 	add    esp,0x20
 
-	sub    esp,0x8
+	sub    esp,0x10
 	mov    DWORD [ebp-0x4],eax
 	mov    eax,DWORD [ebp+0xc]
 	push   eax
@@ -131,6 +131,6 @@ The same code in assembly, but with a few minor tweaks:
 	push   edx
 
 	call   eax
-	add    esp,0x18 ;;
+	add    esp,0x20
 ```
 
