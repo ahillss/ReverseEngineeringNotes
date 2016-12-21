@@ -83,7 +83,7 @@ int main(int argc, char *argv[]) {
     //...
 
     void *lib=dlopen("./libmy.so",RTLD_LAZY);
-    void (*func)(int,char**,char*)= dlsym(lib,"myfunc");
+    void (*func)(char*,int,char**)= dlsym(lib,"myfunc");
     func(global,argc,argv);
 
     //...
