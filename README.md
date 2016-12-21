@@ -76,7 +76,22 @@ The first problem is that you cannot change the size of the binary file, otherwi
 
 I will be using the **dlfcn.h** library. I've only used this on Linux and I am not sure if it is available on Windows/WIN32.
 
-The code you will be inserting will be this:
+The inserted code will look something like:
+
+```C
+int main(int argc, char *argv[]) {
+    //...
+
+    void *lib=dlopen("./libmy.so",RTLD_LAZY);
+    void (*func)(int,char**,char*)= dlsym(lib,"myfunc");
+    func(global,argc,argv);
+
+    //...
+    return 0;
+}
+```
+
+The same code in assembly, but with a few minor tweaks:
 
 ```asm
 	sub    esp,0x18
@@ -112,13 +127,10 @@ The code you will be inserting will be this:
 	push   eax
 	mov    eax,DWORD [ebp-0x4]
 
-	push   ebp
-
 	mov    edx,DWORD [ebx+0x20a]
 	push   edx
 
-	push   ebx
 	call   eax
-	add    esp,0x20
+	add    esp,0x18 ;;
 ```
 
