@@ -2,6 +2,8 @@
 
 A tutorial for reverse engineering C/C++ code compiled to X86 assembly.
 
+This is a work in progress.
+
 ## Getting Started
 
 You will need:
