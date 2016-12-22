@@ -67,7 +67,7 @@ To disassemble a binary use **objdump**.
 If you are reverse engineering an executable you can look for the **main** function, or if a shared library you can look for the function you are interested in.
 
 Depending on the compiler, version and options used, the code may look something like this:
-```
+```asm
 8051600:	55                   	push   ebp
 8051601:	89 e5                	mov    ebp,esp
 8051603:	83 ec 10             	sub    esp,0x10
@@ -77,8 +77,9 @@ Depending on the compiler, version and options used, the code may look something
 805160d:	5b                   	pop    ebx
 805160e:	81 c3 07 3b 03 00    	add    ebx,0x33b07
  
- ...
-8051af2:	8d a5 58 ef ff ff    	lea    esp,[ebp-0x10a8]
+...
+...
+
 8051af8:	5b                   	pop    ebx
 8051af9:	5e                   	pop    esi
 8051afa:	5f                   	pop    edi
