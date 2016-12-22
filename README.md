@@ -116,21 +116,25 @@ The same code in assembly, but with a few minor tweaks:
 	lea    eax,[ebp-0x8]
 	push   eax
 	push   DWORD [ebp-0xc]
+	
+	;dlsym(lib,"myfunc");
 	call   dlsym
 	add    esp,0x20
 
-	sub    esp,0x10
+	sub    esp,0x4
 	mov    DWORD [ebp-0x4],eax
-	mov    eax,DWORD [ebp+0xc]
+	mov    eax,DWORD [ebp+0xc] ;argv
 	push   eax
-	mov    eax,DWORD [ebp+0x8]
+	mov    eax,DWORD [ebp+0x8] ;argc
 	push   eax
-	mov    eax,DWORD [ebp-0x4]
+	mov    eax,DWORD [ebx+0x20a] ;global
+	push   eax
+	
+	mov    eax,DWORD [ebp-0x4] ;myfunc
 
-	mov    edx,DWORD [ebx+0x20a]
-	push   edx
-
+	;myfunc(global,argc,argv)
 	call   eax
-	add    esp,0x20
+	
+	add    esp,0x10
 ```
 
