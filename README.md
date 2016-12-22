@@ -138,3 +138,10 @@ The same code in assembly, but with a few minor tweaks:
 	add    esp,0x10
 ```
 
+Things to note:
+
+* the file and function names are stored on the stack
+* uses dlopen, dlsym
+* stack is always 16byte aligned
+* use of eax register only
+* ebx+0x20a points to the start of the global variables
