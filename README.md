@@ -66,6 +66,27 @@ To disassemble a binary use **objdump**.
 
 If you are reverse engineering an executable you can look for the **main** function, or if a shared library you can look for the function you are interested in.
 
+Depending on the compiler, version and options used, the code may look something like this:
+```
+8051600:	55                   	push   ebp
+8051601:	89 e5                	mov    ebp,esp
+8051603:	83 ec 10             	sub    esp,0x10
+8051606:	56                   	push   esi
+8051607:	53                   	push   ebx
+8051608:	e8 00 00 00 00       	call   805160d <_start@@Base+0xdd>
+805160d:	5b                   	pop    ebx
+805160e:	81 c3 07 3b 03 00    	add    ebx,0x33b07
+ 
+ ...
+8051af2:	8d a5 58 ef ff ff    	lea    esp,[ebp-0x10a8]
+8051af8:	5b                   	pop    ebx
+8051af9:	5e                   	pop    esi
+8051afa:	5f                   	pop    edi
+8051afb:	89 ec                	mov    esp,ebp
+8051afd:	5d                   	pop    ebp
+8051afe:	c3                   	ret    
+```
+
 ## Inserting code
 
 The easiest way to reverse engineer a binary is to replicate the code bit by bit (starting with the main/root function) in your own shared library. This can be done in assembly or C/C++ or both. Then have the binary file load it at runtime.
