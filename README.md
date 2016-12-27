@@ -127,6 +127,61 @@ int main(int argc, char *argv[]) {
     func(global,argc,argv);
 
     //...
-    return 0;
 }
 ```
+
+
+The same code in assembly, but with a few minor tweaks:
+
+```asm
+	sub    esp,0x18
+	
+	;push null terminated string "./libmy.so" onto the stack
+	mov    DWORD [ebp-0xc],0x696c2f2e ;;./li
+	mov    DWORD [ebp-0x8],0x2e796d62 ;;bmy.
+	mov    DWORD [ebp-0x4],0x6f73 ;;so\0
+	
+	push   0x1 ;;RTLD_LAZY
+	lea    eax,[ebp-0xc]
+	push   eax
+	call   dlopen
+	add    esp,0x20
+
+	sub    esp,0x18
+	mov    DWORD [ebp-0xc],eax
+	
+	;push null terminated string "myfunc" onto the stack
+	mov    DWORD [ebp-0x8],0x7566796d ;;myfu
+	mov    DWORD [ebp-0x4],0x636e ;;nc\0
+	lea    eax,[ebp-0x8]
+	push   eax
+	push   DWORD [ebp-0xc]
+	
+	;dlsym(lib,"myfunc");
+	call   dlsym
+	add    esp,0x20
+
+	sub    esp,0x4
+	mov    DWORD [ebp-0x4],eax
+	mov    eax,DWORD [ebp+0xc] ;argv
+	push   eax
+	mov    eax,DWORD [ebp+0x8] ;argc
+	push   eax
+	mov    eax,DWORD [ebx+0x20a] ;global
+	push   eax
+	
+	mov    eax,DWORD [ebp-0x4] ;myfunc
+
+	;myfunc(global,argc,argv)
+	call   eax
+	
+	add    esp,0x10
+```
+
+Things to note:
+
+* the file and function names are stored on the stack
+* uses dlopen, dlsym
+* stack is always 16byte aligned
+* use of eax register only
+* ebx+0x20a points to the start of the global variables
