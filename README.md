@@ -52,7 +52,15 @@ A free book *PC Assembly Language by Paul A. Carter* is freely available [here](
 
 ### A debugger
 
-For debugging problems you introduce, and also for looking at the registers, stack and heap values at runtime, I use [gdb](https://www.gnu.org/software/gdb).
+For debugging problems you introduce, and also for looking at the registers, stack and heap values at runtime, I use [GDB](https://www.gnu.org/software/gdb).
+
+GDB uses the AT&T syntax, some useful commands are:
+* ```run``` - to start the program
+* ```break *location```
+* ```break function_name```
+* ```continue``` - continue after a break
+* ```info register``` - view register values
+* ```x/x $esp``` - view stack values
 
 ### Understand the layout of the executable or library binary
 
