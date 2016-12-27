@@ -22,7 +22,7 @@ For example to call a function at 0x8050e3c from address 0x8051cee:
 
 to generate the hex ```e849f1ffff```
 
-#### A disassembler
+### A disassembler
 
 Is needed to convert the binary representation of the instructions back into assembly. I use objdump from [binutils](https://www.gnu.org/software/binutils).
 
@@ -37,27 +37,6 @@ The assembly generated cannot just be plugged into an assembler due to that the 
 * ```-z``` doesn't strip out any *uneccessary* code, otherwise they are replaced with ellipses
 
 If you are reverse engineering an executable you can look for the function name you are interested in.
-
-Depending on the compiler, version and options used, the code may look something like this:
-```asm
-8051600:	55                   	push   ebp
-8051601:	89 e5                	mov    ebp,esp
-8051603:	83 ec 10             	sub    esp,0x10
-8051606:	56                   	push   esi
-8051607:	53                   	push   ebx
-8051608:	e8 00 00 00 00       	call   805160d
-805160d:	5b                   	pop    ebx
-805160e:	81 c3 07 3b 03 00    	add    ebx,0x33b07
- 
-...
-
-8051af8:	5b                   	pop    ebx
-8051af9:	5e                   	pop    esi
-8051afa:	5f                   	pop    edi
-8051afb:	89 ec                	mov    esp,ebp
-8051afd:	5d                   	pop    ebp
-8051afe:	c3                   	ret    
-```
 
 ### A decompiler
 
