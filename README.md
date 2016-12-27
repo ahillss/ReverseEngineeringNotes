@@ -30,6 +30,37 @@ Is needed to convert the binary representation of the instructions back into ass
 
 The assembly generated cannot just be plugged into an assembler due to that the dissassembler may add additional information to the input to help in readability, data declarations may be reversed as assembly to produce nonsense instructions and amongst other problems.
 
+
+```objdump -M intel -S -D -z binary_file > dump.asm```
+
+*  ```-M intel``` tells it to output Intel assembly
+* ```-S``` ...
+* ```-D``` outputs everything, useful for seeing the hex values of global variables/data
+* ```-z``` doesn't strip out any *uneccessary* code, otherwise they are replaced with ellipses
+
+If you are reverse engineering an executable you can look for the function name you are interested in.
+
+Depending on the compiler, version and options used, the code may look something like this:
+```asm
+8051600:	55                   	push   ebp
+8051601:	89 e5                	mov    ebp,esp
+8051603:	83 ec 10             	sub    esp,0x10
+8051606:	56                   	push   esi
+8051607:	53                   	push   ebx
+8051608:	e8 00 00 00 00       	call   805160d <_start@@Base+0xdd>
+805160d:	5b                   	pop    ebx
+805160e:	81 c3 07 3b 03 00    	add    ebx,0x33b07
+ 
+...
+
+8051af8:	5b                   	pop    ebx
+8051af9:	5e                   	pop    esi
+8051afa:	5f                   	pop    edi
+8051afb:	89 ec                	mov    esp,ebp
+8051afd:	5d                   	pop    ebp
+8051afe:	c3                   	ret    
+```
+
 #### A decompiler
 
 Can be useful to see the structure of the code, identitfy externed global variables from libraries or to identify class virtual tables which can be difficult to discern from the assembly only. I've used [IDA](https://www.hex-rays.com/products/ida/).
@@ -80,36 +111,6 @@ I will be using only the 32-bit X86 assembly.
 
 To disassemble a binary use **objdump**.
 
-```	objdump -M intel -S -D -z binary_file > dump.asm```
-
-*  ```-M intel``` tells it to output Intel assembly
-* ```-S``` not sure ...
-* ```-D``` outputs everything, useful for seeing the hex values of global variables/data
-* ```-z``` doesn't strip out any *uneccessary* code, otherwise they are replaced with ellipses
-
-If you are reverse engineering an executable you can look for the **main** function, or if a shared library you can look for the function you are interested in.
-
-Depending on the compiler, version and options used, the code may look something like this:
-```asm
-8051600:	55                   	push   ebp
-8051601:	89 e5                	mov    ebp,esp
-8051603:	83 ec 10             	sub    esp,0x10
-8051606:	56                   	push   esi
-8051607:	53                   	push   ebx
-8051608:	e8 00 00 00 00       	call   805160d <_start@@Base+0xdd>
-805160d:	5b                   	pop    ebx
-805160e:	81 c3 07 3b 03 00    	add    ebx,0x33b07
- 
-...
-...
-
-8051af8:	5b                   	pop    ebx
-8051af9:	5e                   	pop    esi
-8051afa:	5f                   	pop    edi
-8051afb:	89 ec                	mov    esp,ebp
-8051afd:	5d                   	pop    ebp
-8051afe:	c3                   	ret    
-```
 
 ## Inserting code
 
