@@ -111,9 +111,9 @@ The register ebx is usually used to store the address to it.
 8051b11:	5b                   	pop    ebx
 8051b12:	81 c3 03 36 03 00    	add    ebx,0x33603
 ...
-8051b1b:	8d 83 4a bc ff ff    	lea    eax,[ebx-0x43b6]
+8051b1b:	8d 83 4a bc ff ff    	lea    eax,[ebx-0x43b6]	;string constant
 ...
-805217b:	8b 83 2c 02 00 00    	mov    eax,DWORD PTR [ebx+0x22c]
+805217b:	8b 83 2c 02 00 00    	mov    eax,DWORD PTR [ebx+0x22c] ;global variable
 ...
 80527de:	5b                   	pop    ebx
 80527df:	89 ec                	mov    esp,ebp
