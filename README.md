@@ -140,9 +140,9 @@ The same code in assembly, but with a few minor tweaks:
 	sub    esp,0x18
 	
 	;push null terminated string "./libmy.so" onto the stack
-	mov    DWORD [ebp-0xc],0x696c2f2e ;;./li
-	mov    DWORD [ebp-0x8],0x2e796d62 ;;bmy.
-	mov    DWORD [ebp-0x4],0x6f73 ;;so\0
+	mov    DWORD [ebp-0xc],0x696c2f2e ;;il/.
+	mov    DWORD [ebp-0x8],0x2e796d62 ;;.ymb
+	mov    DWORD [ebp-0x4],0x6f73 ;;\0\0os
 	
 	push   0x1 ;;RTLD_LAZY
 	lea    eax,[ebp-0xc]
