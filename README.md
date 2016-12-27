@@ -10,6 +10,8 @@ This is a work in progress.
 
 Will be necessary to modify the binary files. I use [HT](http://hte.sourceforge.net), which also comes with a builtin disassembler, allowing you to see the assembly representation of the hex code as you type.
 
+When editing a file, you cannot change the size of a file, otherwise it will throw memory offsets used by the instructions.
+
 #### An assembler tool
 
 Will be needed to convert assembly instructions into hex. I use [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from [radare2](https://radare.org).
@@ -17,6 +19,7 @@ Will be needed to convert assembly instructions into hex. I use [rasm2](https://
 It not only useful for converting basic instructions, but also instructions such as a near [jmp](http://x86.renejeschke.de/html/file_module_x86_id_147.html) or [call](http://x86.renejeschke.de/html/file_module_x86_id_26.html), where the offset will need to be calculated.
 
 For example to call a function at 0x8050e3c from address 0x8051cee:
+
 ```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'```
 
 ## Getting Started
