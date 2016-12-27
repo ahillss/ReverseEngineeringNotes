@@ -22,33 +22,28 @@ For example to call a function at 0x8050e3c from address 0x8051cee:
 
 ```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'```
 
+to generate the hex ```e849f1ffff```
+
 #### A disassembler
 
 Is needed to convert the binary representation of the instructions back into assembly. I use objdump from [binutils](https://www.gnu.org/software/binutils).
 
 The assembly generated cannot just be plugged into an assembler due to that the dissassembler may add additional information to the input to help in readability, data declarations may be reversed as assembly to produce nonsense instructions and amongst other problems.
 
-#### A compiler
+#### A decompiler
 
 Can be useful to see the structure of the code, identitfy externed global variables from libraries or to identify class virtual tables which can be difficult to discern from the assembly only. I've used [IDA](https://www.hex-rays.com/products/ida/).
 
-It should be noted that the C/C++ source generated is not completely valid syntax and will often be missing type information (except for their byte sizes).
+It should be noted that the C/C++ source generated will not have completely valid syntax and will often be missing type information (except for their byte sizes).
 
-## Getting Started
+#### Learning assembly
 
-You will need:
+Will be necessary, there are two main assembly styles to choose from, Intel and AT&T. I chose Intel because it looks less cluttered, but once you know one, and are aware of the [differences](http://archive.is/f1dul), switching between them is easy enough.
 
-#### a disassembler
+A free book *PC Assembly Language by Paul A. Carter* is freely available [here](http://pacman128.github.io/pcasm).
 
 
 
-#### a hex editor
-
-#### to know assembly
-
-Have a basic knowledge of assembly used to create the binary.
-
-In this tutorial I will use X86 assembly. There are two main assembly styles to choose from, Intel and AT&T. I prefer Intel because it looks less cluttered. The [differences can be found here](http://archive.is/f1dul). The book I used was *PC Assembly Language by Paul A. Carter* [available free online here](http://pacman128.github.io/pcasm).
 
 
 
