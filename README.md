@@ -64,11 +64,9 @@ GDB uses the AT&T syntax, some useful commands are:
 
 ### Understand the layout of the executable or library binary
 
-To understand what the tools you are using are doing or how they know things, but this is not highly important. Some information on ELF files are here:
+To understand what the tools you are using are doing or how they know things, but this is not highly important. 
 
-* [[1]](http://archive.is/wJW5i)
-* [[2]](http://archive.is/JyChY)
-* [[3]](http://archive.is/DBnia)
+ELF files are broken into sections, first the header which has information like 16/32/64 bit, endianness, machine, etc. Some information on ELF files are here [[1]](http://archive.is/wJW5i), [[2]](http://archive.is/JyChY) and [[3]](http://archive.is/DBnia).
 
 ### Know of endianness
 
