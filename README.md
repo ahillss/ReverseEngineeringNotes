@@ -4,8 +4,6 @@ A guide for reverse engineering C/C++ code compiled to X86 assembly.
 
 This is a work in progress.
 
-## Modifying a binary
-
 ### A hex editor
 
 Will be necessary to modify the binary files. I use [HT](http://hte.sourceforge.net), which also comes with a builtin disassembler, allowing you to see the assembly representation of the hex code as you type.
@@ -91,3 +89,8 @@ As you maybe confused when looking at the order of the hex code. Your binaries a
 
 [WIKI article](https://en.wikipedia.org/wiki/Endianness).
 
+### Global variables
+
+### Stack alignment
+
+### Inserting instructions
