@@ -97,4 +97,8 @@ A function call will push the return address onto the stack, you will need to re
 
 ### Global variables
 
+Not only global variables, but static variables and string constants are also considered part of the global variables.
+
+The register ebx is usually used to store the address to it.
+
 ### Inserting instructions
