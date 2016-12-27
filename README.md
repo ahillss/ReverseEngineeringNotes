@@ -101,7 +101,7 @@ Not only global variables, but static variables and string constants are also co
 
 The register ebx is usually used to store the address to it.
 
-```
+```asm
 8051b00:	55                   	push   ebp
 8051b01:	89 e5                	mov    ebp,esp
 8051b03:	81 ec 5c 30 00 00    	sub    esp,0x305c
