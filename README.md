@@ -112,3 +112,21 @@ The register ebx is usually used to store the address to it.
 * the line ```call 8051b11``` pushes the ```eip``` value on to the stack and calls the next line ```pop ebx``` where it is popped off into the ebx register.
 
 ### Inserting instructions
+
+The easiest way to reverse engineer a binary is to replicate the code bit by bit (usually starting with the main function) in your own shared library. Then load the shared library and call your code from the binary file at runtime.
+
+The [OpenRCT](https://openrct2.org/) project [used](http://archive.is/SDuL0) a program called [CFF Explorer](http://www.ntcore.com/exsuite.php) to load their own DLL. But I am unaware of a similar project in Linux, which I am using, so I will show you how to modify the binary the binary to load your own shared library and call its functions.
+
+The equivalent code in C will look like this:
+```C
+int main(int argc, char *argv[]) {
+    //...
+
+    void *lib=dlopen("./libmy.so",RTLD_LAZY);
+    void (*func)(char*,int,char**)= dlsym(lib,"myfunc");
+    func(global,argc,argv);
+
+    //...
+    return 0;
+}
+```
