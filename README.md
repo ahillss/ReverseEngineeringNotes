@@ -1,8 +1,23 @@
-# Reverse Engineering Tutorial
+# Reverse Engineering Guide
 
-A tutorial for reverse engineering C/C++ code compiled to X86 assembly.
+A guide for reverse engineering C/C++ code compiled to X86 assembly.
 
 This is a work in progress.
+
+## Modifying a binary
+
+#### A hex editor
+
+Will be necessary to modify the binary files. I use [HT](http://hte.sourceforge.net), which also comes with a builtin disassembler, allowing you to see the assembly representation of the hex code as you type.
+
+#### An assembler tool
+
+Will be needed to convert assembly instructions into hex. I use [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from [radare2](https://radare.org).
+
+It not only useful for converting basic instructions, but also instructions such as ```jmp``` and ```call```, which may use ***near*** or ***far ** [jumps](http://x86.renejeschke.de/html/file_module_x86_id_147.html) or [calls](http://x86.renejeschke.de/html/file_module_x86_id_26.html). Where an offset from the current address may be used.
+
+For example to call a function at 0x8050e3c from address 0x8051cee:
+```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'```
 
 ## Getting Started
 
@@ -14,17 +29,13 @@ I use [objdump from binutils](https://www.gnu.org/software/binutils).
 
 #### a hex editor
 
-I use [HT](http://hte.sourceforge.net), which also comes with a builtin disassembler, allowing you to see the assembly representation of the hex code as you type.
-
 #### to know assembly
 
 Have a basic knowledge of assembly used to create the binary.
 
 In this tutorial I will use X86 assembly. There are two main assembly styles to choose from, Intel and AT&T. I prefer Intel because it looks less cluttered. The [differences can be found here](http://archive.is/f1dul). The book I used was *PC Assembly Language by Paul A. Carter* [available free online here](http://pacman128.github.io/pcasm).
 
-#### assembly to hex converter
 
-To insert code into the binary you will need program to convert your assembly into hex code. I use rasm2 from [radare2](https://radare.org).
 
 #### a debugger
 
