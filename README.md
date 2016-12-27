@@ -6,13 +6,13 @@ This is a work in progress.
 
 ### A hex editor
 
-Will be necessary to modify the binary files. I use [HT](http://hte.sourceforge.net), which also comes with a builtin disassembler, allowing you to see the assembly representation of the hex code as you type.
+To modify the binary files. I use [HT](http://hte.sourceforge.net), which also comes with a builtin disassembler, allowing you to see the assembly representation of the hex code as you type.
 
 When editing a file, you cannot change the size of a file, otherwise it will throw memory offsets used by the instructions.
 
 ### An assembler tool
 
-Will be needed to convert assembly instructions into hex. I use [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from [radare2](https://radare.org).
+To convert assembly instructions into hex. I use [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from [radare2](https://radare.org).
 
 It not only useful for converting basic instructions, but also instructions such as a near [jmp](http://x86.renejeschke.de/html/file_module_x86_id_147.html) or [call](http://x86.renejeschke.de/html/file_module_x86_id_26.html), where the offset will need to be calculated.
 
@@ -61,23 +61,23 @@ Depending on the compiler, version and options used, the code may look something
 
 ### A decompiler
 
-Can be useful to see the structure of the code, identitfy externed global variables from libraries or to identify class virtual tables which can be difficult to discern from the assembly only. I've used [IDA](https://www.hex-rays.com/products/ida/).
+Useful to see the structure of the code, identitfy externed global variables from libraries or to identify class virtual tables which can be difficult to discern from the assembly only. I've used [IDA](https://www.hex-rays.com/products/ida/).
 
 It should be noted that the C/C++ source generated will not have completely valid syntax and will often be missing type information (except for their byte sizes).
 
 ### Learning assembly
 
-Will be necessary, there are two main assembly styles to choose from, Intel and AT&T. I chose Intel because it looks less cluttered, but once you know one, and are aware of the [differences](http://archive.is/f1dul), switching between them is easy enough.
+There are two main assembly styles to choose from, Intel and AT&T. I chose Intel because it looks less cluttered, but once you know one, and are aware of the [differences](http://archive.is/f1dul), switching between them is easy enough.
 
 A free book *PC Assembly Language by Paul A. Carter* is freely available [here](http://pacman128.github.io/pcasm).
 
 ### A debugger
 
-Is useful for debugging problems you introduce, and also for looking at the registers, stack and heap values at runtime, I use [gdb](https://www.gnu.org/software/gdb).
+For debugging problems you introduce, and also for looking at the registers, stack and heap values at runtime, I use [gdb](https://www.gnu.org/software/gdb).
 
 ### Understand the layout of the executable or library binary
 
-So you can understand what the tools you are using are doing or how they know things, but this is not highly important. Some information on ELF files are here:
+To understand what the tools you are using are doing or how they know things, but this is not highly important. Some information on ELF files are here:
 
 * [[1]](http://archive.is/wJW5i)
 * [[2]](http://archive.is/JyChY)
