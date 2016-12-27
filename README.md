@@ -89,8 +89,12 @@ As you maybe confused when looking at the order of the hex code. Your binaries a
 
 [WIKI article](https://en.wikipedia.org/wiki/Endianness).
 
-### Global variables
-
 ### Stack alignment
+
+Depending on the compiler options when the binary was compiled, the stack might have to be aligned to a certain amount of bytes. Aligning it to 16 bytes is usually best.
+
+A function call will push the return address onto the stack, you will need to remember to count that as well.
+
+### Global variables
 
 ### Inserting instructions
