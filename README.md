@@ -137,48 +137,55 @@ int main(int argc, char *argv[]) {
 The same code in assembly, but with a few minor tweaks:
 
 ```asm
-	sub    esp,0x18
-	
-	;push null terminated string "./libmy.so" onto the stack
-	mov    DWORD [ebp-0xc],0x696c2f2e ;;il/.
-	mov    DWORD [ebp-0x8],0x2e796d62 ;;.ymb
-	mov    DWORD [ebp-0x4],0x6f73 ;;\0\0os
-	
-	push   0x1 ;;RTLD_LAZY
-	lea    eax,[ebp-0xc]
-	push   eax
-	call   dlopen
-	add    esp,0x20
+; 12 bytes for string, 12 bytes for padding
+sub    esp,0x18 
 
-	sub    esp,0x18
-	mov    DWORD [ebp-0xc],eax
-	
-	;push null terminated string "myfunc" onto the stack
-	mov    DWORD [ebp-0x8],0x7566796d ;;ufym
-	mov    DWORD [ebp-0x4],0x636e ;;\0\0cn
-	lea    eax,[ebp-0x8]
-	push   eax
-	push   DWORD [ebp-0xc]
-	
-	;dlsym(lib,"myfunc");
-	call   dlsym
-	add    esp,0x20
+; push null terminated string "./libmy.so" onto the stack
+mov    DWORD [ebp-0xc],0x696c2f2e ;;il/.
+mov    DWORD [ebp-0x8],0x2e796d62 ;;.ymb
+mov    DWORD [ebp-0x4],0x6f73 ;;\0\0os
 
-	sub    esp,0x4
-	mov    DWORD [ebp-0x4],eax
-	mov    eax,DWORD [ebp+0xc] ;argv
-	push   eax
-	mov    eax,DWORD [ebp+0x8] ;argc
-	push   eax
-	mov    eax,DWORD [ebx+0x20a] ;global
-	push   eax
-	
-	mov    eax,DWORD [ebp-0x4] ;myfunc
+push   0x1 ;;RTLD_LAZY
+lea    eax,[ebp-0xc]
+push   eax
+call   dlopen
+add    esp,0x20
 
-	;myfunc(global,argc,argv)
-	call   eax
-	
-	add    esp,0x10
+; 4 bytes for storing lib address returned from dlopen,
+; 8 bytes for string and 12 bytes for padding
+sub    esp,0x18 
+
+;store lib
+mov    DWORD [ebp-0xc],eax
+
+;push null terminated string "myfunc" onto the stack
+mov    DWORD [ebp-0x8],0x7566796d ;;ufym
+mov    DWORD [ebp-0x4],0x636e ;;\0\0cn
+lea    eax,[ebp-0x8]
+push   eax
+
+;use lib as param
+push   DWORD [ebp-0xc]
+
+;dlsym(lib,"myfunc");
+call   dlsym
+add    esp,0x20
+
+sub    esp,0x4
+mov    DWORD [ebp-0x4],eax
+mov    eax,DWORD [ebp+0xc] ;argv
+push   eax
+mov    eax,DWORD [ebp+0x8] ;argc
+push   eax
+mov    eax,DWORD [ebx+0x20a] ;global
+push   eax
+
+mov    eax,DWORD [ebp-0x4] ;myfunc
+
+;myfunc(global,argc,argv)
+call   eax
+
+add    esp,0x10
 ```
 
 Things to note:
