@@ -22,13 +22,25 @@ For example to call a function at 0x8050e3c from address 0x8051cee:
 
 ```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'```
 
+#### A disassembler
+
+Is needed to convert the binary representation of the instructions back into assembly. I use objdump from [binutils](https://www.gnu.org/software/binutils).
+
+The assembly generated cannot just be plugged into an assembler due to that the dissassembler may add additional information to the input to help in readability, data declarations may be reversed as assembly to produce nonsense instructions and amongst other problems.
+
+#### A compiler
+
+Can be useful to see the structure of the code, identitfy externed global variables from libraries or to identify class virtual tables which can be difficult to discern from the assembly only. I've used [IDA](https://www.hex-rays.com/products/ida/).
+
+It should be noted that the C/C++ source generated is not completely valid syntax and will often be missing type information (except for their byte sizes).
+
 ## Getting Started
 
 You will need:
 
 #### a disassembler
 
-I use [objdump from binutils](https://www.gnu.org/software/binutils). 
+
 
 #### a hex editor
 
@@ -46,7 +58,7 @@ I use [gdb](https://www.gnu.org/software/gdb/). Useful for debugging errors you 
 
 #### a decompiler (optional)
 
-I've used [IDA](https://www.hex-rays.com/products/ida/). Useful for understanding the structure of the code, and also the decompilers can automatically trace the code and find the name of things like externed global variables (from libraries) or identify the virtual tables of classes, which can be difficult when only looking at the assembly.
+ Useful for understanding the structure of the code, and also the decompilers can automatically trace the code and find the name of things like of classes, which can be difficult when only looking at the assembly.
 
 #### an assembler, or a C/C++ compiler or both (optional)
 
