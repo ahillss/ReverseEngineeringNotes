@@ -115,7 +115,7 @@ The register ebx is usually used to store the address to it.
 
 The easiest way to reverse engineer a binary is to replicate the code bit by bit (usually starting with the main function) in your own shared library. Then load the shared library and call your code from the binary file at runtime.
 
-The [OpenRCT](https://openrct2.org/) project [used](http://archive.is/SDuL0) a program called [CFF Explorer](http://www.ntcore.com/exsuite.php) to load their own DLL. But I am unaware of a similar project in Linux, which I am using, so I will show you how to modify the binary the binary to load your own shared library and call its functions. Though I will be using the ```dlopen``` and ```dlsym``` functions, which your binary will need to have available. There is probably a way to load them if they are not, but for now I am yet to figure out how.
+The [OpenRCT](https://openrct2.org/) project [used](http://archive.is/SDuL0) a program called [CFF Explorer](http://www.ntcore.com/exsuite.php) to load their own DLL. But I am unaware of a similar project in Linux of which I am using, so I will show you how to modify the binary the binary to load your own shared library and call a function from it. I will be using the ```dlopen``` and ```dlsym``` functions, which your binary will need to have available (accessible from the executable). There is probably a way to load them if they are not there, but for now I am yet to figure out how.
 
 The equivalent code in C will look like this:
 ```C
