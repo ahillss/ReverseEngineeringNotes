@@ -56,11 +56,14 @@ For debugging problems you introduce, and also for looking at the registers, sta
 
 GDB uses the AT&T syntax, some useful commands are:
 * ```run``` - to start the program
-* ```break *location```
-* ```break function_name```
+* ```break *location``` - break at the location a hex value
+* ```break function_name``` - break when the function with passed name is called
 * ```continue``` - continue after a break
 * ```info register``` - view register values
 * ```x/x $esp``` - view stack values
+* ```info frame``` - get frame info
+* ```frame 0``` - change frame to the integer provided
+* ```bt``` - a stack trace
 
 ### Understand the layout of the executable or library binary
 
