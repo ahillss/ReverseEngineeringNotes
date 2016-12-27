@@ -79,13 +79,15 @@ Is useful for debugging problems you introduce, and also for looking at the regi
 
 #### Understand the layout of the executable or library binary
 
-So you can understand what the tools you are using are doing, but this is not highly important. Some information on ELF files are here:
+So you can understand what the tools you are using are doing or how they know things, but this is not highly important. Some information on ELF files are here:
 
 * [[1]](http://archive.is/wJW5i)
 * [[2]](http://archive.is/JyChY)
 * [[3]](http://archive.is/DBnia)
 
-#### Understand the different C/C++ compiler options
+### Know of endianness
 
-In regards to ...
+As you maybe confused when looking at the order of the hex code. Your binaries are most likely using little-endian as it is what Intel CPUs use.
+
+[WIKI article](https://en.wikipedia.org/wiki/Endianness).
 
