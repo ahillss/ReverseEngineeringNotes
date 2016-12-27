@@ -154,8 +154,8 @@ The same code in assembly, but with a few minor tweaks:
 	mov    DWORD [ebp-0xc],eax
 	
 	;push null terminated string "myfunc" onto the stack
-	mov    DWORD [ebp-0x8],0x7566796d ;;myfu
-	mov    DWORD [ebp-0x4],0x636e ;;nc\0
+	mov    DWORD [ebp-0x8],0x7566796d ;;ufym
+	mov    DWORD [ebp-0x4],0x636e ;;\0\0cn
 	lea    eax,[ebp-0x8]
 	push   eax
 	push   DWORD [ebp-0xc]
