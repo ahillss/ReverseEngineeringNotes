@@ -45,7 +45,7 @@ Depending on the compiler, version and options used, the code may look something
 8051603:	83 ec 10             	sub    esp,0x10
 8051606:	56                   	push   esi
 8051607:	53                   	push   ebx
-8051608:	e8 00 00 00 00       	call   805160d <_start@@Base+0xdd>
+8051608:	e8 00 00 00 00       	call   805160d
 805160d:	5b                   	pop    ebx
 805160e:	81 c3 07 3b 03 00    	add    ebx,0x33b07
  
