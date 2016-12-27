@@ -108,8 +108,8 @@ The register ebx is usually used to store the address to it.
 ...
 8051b0b:	53                   	push   ebx
 8051b0c:	e8 00 00 00 00       	call   8051b11
-8051b11:	5b                   	pop    ebx
-8051b12:	81 c3 03 36 03 00    	add    ebx,0x33603
+8051b11:	5b                   	pop    ebx ;get current address
+8051b12:	81 c3 03 36 03 00    	add    ebx,0x33603 ;add constant to ebx to the global address
 ...
 8051b1b:	8d 83 4a bc ff ff    	lea    eax,[ebx-0x43b6]	;string constant
 ...
