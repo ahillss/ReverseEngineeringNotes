@@ -73,121 +73,19 @@ Will be necessary, there are two main assembly styles to choose from, Intel and 
 
 A free book *PC Assembly Language by Paul A. Carter* is freely available [here](http://pacman128.github.io/pcasm).
 
+#### A debugger
 
+Is useful for debugging problems you introduce, and also for looking at the registers, stack and heap values at runtime, I use [gdb](https://www.gnu.org/software/gdb).
 
+#### Understand the layout of the executable or library binary
 
+So you can understand what the tools you are using are doing, but this is not highly important. Some information on ELF files are here:
 
+* [[1]](http://archive.is/wJW5i)
+* [[2]](http://archive.is/JyChY)
+* [[3]](http://archive.is/DBnia)
 
-#### a debugger
+#### Understand the different C/C++ compiler options
 
-I use [gdb](https://www.gnu.org/software/gdb/). Useful for debugging errors you (or the original developers) made or for looking at the runtime values of the registers/stack/heap.
+In regards to ...
 
-#### a decompiler (optional)
-
- Useful for understanding the structure of the code, and also the decompilers can automatically trace the code and find the name of things like of classes, which can be difficult when only looking at the assembly.
-
-#### an assembler, or a C/C++ compiler or both (optional)
-
-An assembler for either generating your own shared library, executable or just object files. A C/C++ compiler for the same reason, depending on if you prefer to write in either assembly, C/C++ or both.
-
-## Minor details
-I will mention a few things here that you should know of, but don't need to go indepth.
-
-* know how the executable/dll/shared library files are layed out. For Linux, ELF files are commonly used, some websites I read about them are [[1]](http://archive.is/wJW5i), [[2]](http://archive.is/JyChY) and [[3]](http://archive.is/DBnia).
-* Know the difference between **real mode** and **protected mode** for programs.
-* know about endianness 
-
-## Beginner Misconceptions
-
-When I first stated learning about reverse engineering, I had a couple of misconceptions.
-
-* The assembly disassembled from a binary can run through an assembler. Some dissemblers have slight syntax changes, memory addresses and offsets cause problems, global variables/data are treated like instructions and not data.
-
-* Decompiled code can be recompiled. Of the various decompilers I tried, they all outputted invalid C/C++ syntax in certain areas, also they often cannot resolve the data types properly, only getting the data type sizes correct.
-
-## Disassembling the binary
-
-I will be using only the 32-bit X86 assembly.
-
-To disassemble a binary use **objdump**.
-
-
-## Inserting code
-
-The easiest way to reverse engineer a binary is to replicate the code bit by bit (starting with the main/root function) in your own shared library. This can be done in assembly or C/C++ or both. Then have the binary file load it at runtime.
-
-The [OpenRCT](https://openrct2.org/) project [used](http://archive.is/SDuL0) a program called [CFF Explorer](http://www.ntcore.com/exsuite.php) to load their DLL. Though in this tutorial I will inserting my own code into the binary to load the shared library.
-
-The first problem is that you cannot change the size of the binary file, otherwise it will throw off all the memory addresses used. So we will need to make some room by overwriting the existing code which is the second problem. You can either identify some unecessary code or you can find some simple code that can be easily replicated in your shared library.
-
-I will be using the **dlfcn.h** library. I've only used this on Linux and I am not sure if it is available on Windows/WIN32.
-
-The inserted code will look something like:
-
-```C
-int main(int argc, char *argv[]) {
-    //...
-
-    void *lib=dlopen("./libmy.so",RTLD_LAZY);
-    void (*func)(char*,int,char**)= dlsym(lib,"myfunc");
-    func(global,argc,argv);
-
-    //...
-    return 0;
-}
-```
-
-The same code in assembly, but with a few minor tweaks:
-
-```asm
-	sub    esp,0x18
-	
-	;push null terminated string "./libmy.so" onto the stack
-	mov    DWORD [ebp-0xc],0x696c2f2e ;;./li
-	mov    DWORD [ebp-0x8],0x2e796d62 ;;bmy.
-	mov    DWORD [ebp-0x4],0x6f73 ;;so\0
-	
-	push   0x1 ;;RTLD_LAZY
-	lea    eax,[ebp-0xc]
-	push   eax
-	call   dlopen
-	add    esp,0x20
-
-	sub    esp,0x18
-	mov    DWORD [ebp-0xc],eax
-	
-	;push null terminated string "myfunc" onto the stack
-	mov    DWORD [ebp-0x8],0x7566796d ;;myfu
-	mov    DWORD [ebp-0x4],0x636e ;;nc\0
-	lea    eax,[ebp-0x8]
-	push   eax
-	push   DWORD [ebp-0xc]
-	
-	;dlsym(lib,"myfunc");
-	call   dlsym
-	add    esp,0x20
-
-	sub    esp,0x4
-	mov    DWORD [ebp-0x4],eax
-	mov    eax,DWORD [ebp+0xc] ;argv
-	push   eax
-	mov    eax,DWORD [ebp+0x8] ;argc
-	push   eax
-	mov    eax,DWORD [ebx+0x20a] ;global
-	push   eax
-	
-	mov    eax,DWORD [ebp-0x4] ;myfunc
-
-	;myfunc(global,argc,argv)
-	call   eax
-	
-	add    esp,0x10
-```
-
-Things to note:
-
-* the file and function names are stored on the stack
-* uses dlopen, dlsym
-* stack is always 16byte aligned
-* use of eax register only
-* ebx+0x20a points to the start of the global variables
