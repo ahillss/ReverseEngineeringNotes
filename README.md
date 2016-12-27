@@ -170,12 +170,9 @@ add    esp,0x20
 
 sub    esp,0x4
 mov    DWORD [ebp-0x4],eax
-mov    eax,DWORD [ebp+0xc] ;argv
-push   eax
-mov    eax,DWORD [ebp+0x8] ;argc
-push   eax
-mov    eax,DWORD [ebx+0x20a] ;global
-push   eax
+push   DWORD [ebp+0xc] ;argv
+push   DWORD [ebp+0x8] ;argc
+push   DWORD [ebx+0x20a] ;global
 
 mov    eax,DWORD [ebp-0x4] ;myfunc
 
