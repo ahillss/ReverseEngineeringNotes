@@ -20,7 +20,7 @@ For example to call a function at 0x8050e3c from address 0x8051cee:
 
 ```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'```
 
-to generate the hex ```e849f1ffff```
+to generate the hex ```e8 49 f1 ff ff```
 
 ### A disassembler
 
