@@ -6,13 +6,13 @@ This is a work in progress.
 
 ### A hex editor
 
-To modify the binary files. I use [HT](http://hte.sourceforge.net), which also comes with a builtin disassembler, allowing you to see the assembly representation of the hex code as you type.
+To modify the binary files. [HT](http://hte.sourceforge.net), comes with a builtin disassembler, allowing you to see the assembly representation of the hex code as you type.
 
 When editing a file, you cannot change the size of a file, otherwise it will throw memory offsets used by the instructions.
 
 ### An assembler tool
 
-To convert assembly instructions into hex. I use [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from [radare2](https://radare.org).
+To convert assembly instructions into hex. The only tool I am aware of is [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from [radare2](https://radare.org).
 
 It not only useful for converting basic instructions, but also instructions such as a near [jump](http://x86.renejeschke.de/html/file_module_x86_id_147.html) or [call](http://x86.renejeschke.de/html/file_module_x86_id_26.html), where the offset will need to be calculated.
 
@@ -22,12 +22,13 @@ For example to call a function at 0x8050e3c from address 0x8051cee:
 
 to generate the hex ```e8 49 f1 ff ff```
 
+Also make sure to double check the generated hex by viewing it in a disassembler to make sure it is correct, I believe rasm2 might have problems in certain circumstances.
+
 ### A disassembler
 
-Is needed to convert the binary representation of the instructions back into assembly. I use objdump from [binutils](https://www.gnu.org/software/binutils).
+Is needed to convert the binary representation of the instructions back into assembly. An easy to use one is objdump from [binutils](https://www.gnu.org/software/binutils).
 
 The assembly generated cannot just be plugged into an assembler due to that the dissassembler may add additional information to the input to help in readability, data declarations may be reversed as assembly to produce nonsense instructions and amongst other problems.
-
 
 ```objdump -M intel -S -D -z binary_file > dump.asm```
 
@@ -40,19 +41,19 @@ If you are reverse engineering an executable you can look for the function name 
 
 ### A decompiler
 
-Useful to see the structure of the code, identitfy externed global variables from libraries or to identify class virtual tables which can be difficult to discern from the assembly only. I've used [IDA](https://www.hex-rays.com/products/ida/).
+Useful to see the structure of the code, identitfy externed global variables from libraries or to identify class virtual tables which can be difficult to discern from the assembly only. A good one is [IDA](https://www.hex-rays.com/products/ida/).
 
 It should be noted that the C/C++ source generated will not have completely valid syntax and will often be missing type information (except for their byte sizes).
 
 ### Learning assembly
 
-There are two main assembly styles to choose from, Intel and AT&T. I chose Intel because it looks less cluttered, but once you know one, and are aware of the [differences](http://archive.is/f1dul), switching between them is easy enough.
+There are two main assembly styles to choose from, Intel and AT&T. Intel is less cluttered, but you learn one and are aware of the [differences](http://archive.is/f1dul), switching between them is easy enough.
 
-A free book *PC Assembly Language by Paul A. Carter* is freely available [here](http://pacman128.github.io/pcasm).
+Thw book *PC Assembly Language by Paul A. Carter* is freely available [here](http://pacman128.github.io/pcasm).
 
 ### A debugger
 
-For debugging problems you introduce, and also for looking at the registers, stack and heap values at runtime, I use [GDB](https://www.gnu.org/software/gdb).
+For debugging problems you introduce, and also for looking at the registers, stack and heap values at runtime, a good one is  [GDB](https://www.gnu.org/software/gdb).
 
 GDB uses the AT&T syntax, some useful commands are:
 * ```run``` - to start the program
@@ -67,23 +68,21 @@ GDB uses the AT&T syntax, some useful commands are:
 
 ### Understand the layout of the executable or library binary
 
-To understand what the tools you are using are doing or how they know things, but this is not highly important. 
+To be able to get the pertinent information about your target binary.
 
-ELF files are broken into sections, first is the header which has information like 16/32/64 bit, endianness, machine, etc. Some information on ELF files are [here](http://archive.is/wJW5i), [here](http://archive.is/JyChY) and [here](http://archive.is/DBnia).
+ELF files are broken into sections, at the top is the header which has information like 16/32/64 bit, endianness, machine, etc. Some information on ELF files are [here](http://archive.is/wJW5i), [here](http://archive.is/JyChY) and [here](http://archive.is/DBnia).
 
 ### Know of endianness
 
 As you maybe confused when looking at the order of the hex code. Your binaries are most likely using little-endian as it is what Intel CPUs use.
 
-[WIKI article](https://en.wikipedia.org/wiki/Endianness).
-
 ### Stack alignment
 
-Depending on the compiler options when the binary was compiled, the stack might have to be aligned to a certain amount of bytes. Aligning it to 16 bytes is usually best.
+Depending on the compiler options used when the binary was compiled, the stack might have to be aligned to a certain amount of bytes. Aligning it to 16 bytes is usually best, but it can be figured out by looking at any padding (declared but unused) used.
 
-A function call will push the return address onto the stack, you will need to remember to count that as well.
+Also a function call will push the return address onto the stack, you will need to remember to count that as well.
 
-Also another stack related thing you might see after an a ```add esp,0x8``` is ```add esp,0xfffffff8```. This is just using the unsigned integer overflow where it wraps around, it is the same as ```sub esp,0x8```.
+Another stack related thing you might see after an a ```add esp,0x8``` is ```add esp,0xfffffff8```. This is just using the unsigned integer overflow where it wraps around, it is the same as ```sub esp,0x8```.
 
 ### Global variables
 
