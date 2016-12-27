@@ -80,6 +80,8 @@ Depending on the compiler options when the binary was compiled, the stack might 
 
 A function call will push the return address onto the stack, you will need to remember to count that as well.
 
+Also another stack related thing you might see after an a ```add esp,0x8``` is ```add esp,0xfffffff8'''. This is just using the unsigned integer overflow where it wraps around, it is the same as ```sub esp,0x8```.
+
 ### Global variables
 
 Not only global variables, but static variables and string constants are also considered part of the global variables.
