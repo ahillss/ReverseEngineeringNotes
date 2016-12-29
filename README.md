@@ -146,6 +146,8 @@ push   0x1 ;;RTLD_LAZY
 lea    eax,[ebp-0xc]
 push   eax
 call   dlopen
+
+;reclaim 24 bytes from sub, 8 bytes from pushes
 add    esp,0x20
 
 ; 4 bytes for storing lib address returned from dlopen,
@@ -166,8 +168,11 @@ push   DWORD [ebp-0xc]
 
 ;dlsym(lib,"myfunc");
 call   dlsym
+
+;reclaim 24 bytes from sub, 8 bytes from pushes
 add    esp,0x20
 
+;4 bytes to store myfunc address
 sub    esp,0x4
 mov    DWORD [ebp-0x4],eax
 push   DWORD [ebp+0xc] ;argv
@@ -179,5 +184,8 @@ mov    eax,DWORD [ebp-0x4] ;myfunc
 ;myfunc(global,argc,argv)
 call   eax
 
+;reclaim 4 bytes from sub, 12 bytes from pushes
 add    esp,0x10
 ```
+
+### Classes and Structs
