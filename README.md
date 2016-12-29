@@ -74,15 +74,15 @@ ELF files are broken into sections, at the top is the header which has informati
 
 ### Know of endianness
 
-As you maybe confused when looking at the order of the hex code. Your binaries are most likely using little-endian as it is what Intel CPUs use.
+Important for when looking at the hex, as you maybe confused by the order it appears. Your binaries are most likely using little-endian as it is what Intel CPUs use.
 
-### Stack alignment
+### Stacks and Alignment
 
 Depending on the compiler options used when the binary was compiled, the stack might have to be aligned to a certain amount of bytes. Aligning it to 16 bytes is usually best, but it can be figured out by looking at any padding (declared but unused) used.
 
 Also a function call will push the return address onto the stack, you will need to remember to count that as well.
 
-Another stack related thing you might see after an a ```add esp,0x8``` is ```add esp,0xfffffff8```. This is just using the unsigned integer overflow where it wraps around, it is the same as ```sub esp,0x8```.
+Another thing you might see after an a ```add esp,0x8``` is ```add esp,0xfffffff8```. This is just using the unsigned integer overflow where it wraps around, it is the same as ```sub esp,0x8```.
 
 ### Global variables
 
