@@ -26,7 +26,7 @@ Also make sure to double check the generated hex by viewing it in a disassembler
 
 ### Disassembler
 
-Is needed to convert the binary representation of the instructions back into assembly. An easy to use one is objdump from [binutils](https://www.gnu.org/software/binutils).
+To convert the binary representation of the instructions back into assembly. An easy to use one is objdump from [binutils](https://www.gnu.org/software/binutils).
 
 The assembly generated cannot just be plugged into an assembler due to that the dissassembler may add additional information to the input to help in readability, data declarations may be reversed as assembly to produce nonsense instructions and amongst other problems.
 
