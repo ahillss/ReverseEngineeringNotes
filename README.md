@@ -35,7 +35,7 @@ The assembly generated cannot just be plugged into an assembler due to that the 
 *  ```-M intel``` tells it to output Intel assembly
 * ```-S``` ...
 * ```-D``` outputs everything, useful for seeing the hex values of global variables/data
-* ```-z``` doesn't strip out any *uneccessary* code, otherwise they are replaced with ellipses
+* ```-z``` doesn't strip out any uneccessary code, otherwise they are replaced with ellipses
 
 If you are reverse engineering an executable you can look for the function name you are interested in.
 
