@@ -4,13 +4,13 @@ A beginners guide for reverse engineering C/C++ code compiled to X86 assembly. A
 
 This is a work in progress.
 
-### A hex editor
+### Hex editor
 
-To modify the binary files. [HT](http://hte.sourceforge.net), comes with a builtin disassembler, allowing you to see the assembly representation of the hex code as you type.
+For modifying the binary files. [HT](http://hte.sourceforge.net), comes with a builtin disassembler, allowing you to see the assembly representation of the hex code as you type.
 
 When editing a file, you cannot change the size of a file, otherwise it will throw memory offsets used by the instructions.
 
-### An assembler tool
+### Assembler tool
 
 To convert assembly instructions into hex. The only tool I am aware of is [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from [radare2](https://radare.org).
 
@@ -24,7 +24,7 @@ to generate the hex ```e8 49 f1 ff ff```
 
 Also make sure to double check the generated hex by viewing it in a disassembler to make sure it is correct, I believe rasm2 might have problems in certain circumstances.
 
-### A disassembler
+### Disassembler
 
 Is needed to convert the binary representation of the instructions back into assembly. An easy to use one is objdump from [binutils](https://www.gnu.org/software/binutils).
 
@@ -39,7 +39,7 @@ The assembly generated cannot just be plugged into an assembler due to that the 
 
 If you are reverse engineering an executable you can look for the function name you are interested in.
 
-### A decompiler
+### Decompiler
 
 Useful to see the structure of the code, identitfy externed global variables from libraries or to identify class virtual tables which can be difficult to discern from the assembly only. A good one is [IDA](https://www.hex-rays.com/products/ida/).
 
@@ -51,9 +51,9 @@ There are two main assembly styles to choose from, Intel and AT&T. Intel is less
 
 Thw book *PC Assembly Language by Paul A. Carter* is freely available [here](http://pacman128.github.io/pcasm).
 
-### A debugger
+### Debugger
 
-For debugging problems you introduce, and also for looking at the registers, stack and heap values at runtime, a good one is  [GDB](https://www.gnu.org/software/gdb).
+For debugging problems you introduce, or for looking at the registers, stack and heap values at runtime. A good one is  [GDB](https://www.gnu.org/software/gdb).
 
 GDB uses the AT&T syntax, some useful commands are:
 * ```run``` - to start the program
@@ -66,13 +66,13 @@ GDB uses the AT&T syntax, some useful commands are:
 * ```frame 0``` - change frame to the integer provided
 * ```bt``` - a stack trace
 
-### Understand the layout of the executable or library binary
+### Layout of the executable or library binary
 
-To be able to get the pertinent information about your target binary.
+Useful to be able to get the pertinent information about your target binary.
 
 ELF files are broken into sections, at the top is the header which has information like 16/32/64 bit, endianness, machine, etc. Some information on ELF files are [here](http://archive.is/wJW5i), [here](http://archive.is/JyChY) and [here](http://archive.is/DBnia).
 
-### Know of endianness
+### Endianness
 
 Important for when looking at the hex, as you maybe confused by the order it appears. Your binaries are most likely using little-endian as it is what Intel CPUs use.
 
