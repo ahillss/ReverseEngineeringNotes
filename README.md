@@ -84,6 +84,14 @@ Also a function call will push the return address onto the stack, you will need 
 
 Another thing you might see after an a ```add esp,0x8``` is ```add esp,0xfffffff8```. This is just using the unsigned integer overflow where it wraps around, it is the same as ```sub esp,0x8```.
 
+### Executable start address
+
+When disassembling executables, the start address starts at```0x8048000```. Some disassemblers will start at ```0x0``` and others like **objdump** at the ```0x8048000```.
+
+Hex editors all seem to start at ```0x0```, so to use the *goto address* feature you will need to convert the addresses (from ***objdump***) by subtracting them from ```0x8048000```.
+
+I believe shared libraries start from a different address.
+
 ### Global variables
 
 Not only global variables, but static variables and string constants are also considered part of the global variables.
