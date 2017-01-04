@@ -191,7 +191,7 @@ push   ebx ;useful for accessing global variables/constants/etc
 
 mov    eax,DWORD [ebp-0x4] ;myfunc
 
-;myfunc(global,argc,argv)
+;myfunc(ebx,argc,argv)
 call   eax
 
 ;reclaim 4 bytes from sub, 12 bytes from pushes
