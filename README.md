@@ -121,6 +121,8 @@ The register ebx is usually used to store the address to it.
 * ```[ebx-value]``` seem to refer to constants and ```[ebx+value]``` seem to refer to global variables, I don't know if this is the same everywhere all the time though.
 * the line ```call 8051b11``` pushes the ```eip``` value on to the stack and calls the next line ```pop ebx``` where it is popped off into the ebx register.
 
+Also note that decompiled source code (from **ida**) will often use a ```global``` variable. That doesn't actually refer to the pointer stored in```ebx```, but rather ```ebx + offset```. I am currently not sure how the offset is found by the decompiler or what it means.
+
 ### Inserting instructions
 
 The easiest way to reverse engineer a binary is to replicate the code bit by bit (usually starting with the main function) in your own shared library. Then load the shared library and call your code from the binary file at runtime.
