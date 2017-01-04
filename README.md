@@ -47,7 +47,7 @@ It should be noted that the C/C++ source generated will not have completely vali
 
 ### Learning assembly
 
-There are two main assembly styles to choose from, Intel and AT&T. I prefer Intel as it is less cluttered, but once you have learned one you can look up the [differences](http://www.imada.sdu.dk/Courses/DM18/Litteratur/IntelnATT.htm) ([archived](http://archive.is/f1dul)) and be able to use both.
+There are two main assembly styles to choose from, Intel and AT&T. I prefer Intel as it is less cluttered, but once you have learned one you can look up the [differences](http://www.imada.sdu.dk/Courses/DM18/Litteratur/IntelnATT.htm) ([archived](http://archive.is/f1dul)) and be able to use the other.
 
 Thw book *PC Assembly Language by Paul A. Carter* is freely available [here](http://pacman128.github.io/pcasm).
 
