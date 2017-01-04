@@ -1,8 +1,8 @@
 # Reverse Engineering Beginners Guide
 
-A beginners guide for reverse engineering C/C++ code compiled to X86 assembly. All assembly examples will be X86 32-bit.
+Not really a guide, but a listing of each problem I had to go through when learning how to reverse engineer C++ code compiled to 32-bit X86 assembly.
 
-This is a work in progress.
+*Note: this is a work in progress.*
 
 ### Hex editor
 
