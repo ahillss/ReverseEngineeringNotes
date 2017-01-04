@@ -197,7 +197,7 @@ call   eax
 ;reclaim 4 bytes from sub, 12 bytes from pushes
 add    esp,0x10
 ```
-You will need to make room for this code in the binary. One strategy is to overwrtie a section of code that is easy to replicate in your shared library. The second strategy is to overwrite a section of code that won't be missed like  *command line options* handling code, while hard coding in any options you need to execute in the binary or your shared library.
+You will need to make room for this code in the binary. One strategy is to overwrtie a section of code that is easy to replicate in your shared library. The second strategy is to overwrite a section of code that won't be missed like  *command line options* handling code, while hard coding in any options you need to use in the binary or your shared library.
 
 ### Classes and Structs
 
