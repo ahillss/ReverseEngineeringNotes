@@ -121,7 +121,7 @@ The register ebx is usually used to store the address to it.
 * ```[ebx-value]``` seem to refer to constants and ```[ebx+value]``` seem to refer to global variables, I don't know if this is the same everywhere all the time though.
 * the line ```call 8051b11``` pushes the ```eip``` value on to the stack and calls the next line ```pop ebx``` where it is popped off into the ebx register.
 
-Also note that decompiled source code (from **ida**) will often use a ```global``` variable. Which doesn't actually refer to the pointer value stored in```ebx```, but rather ```ebx + offset```. I do not know how the offset is calculated or what the significance of it is.
+Also note that decompiled source code (from **ida**) will often use a ```global``` variable. Which doesn't actually refer to the pointer value stored in```ebx``` as you would assume, but rather ```ebx + offset```. I do not know how the offset is calculated or what the significance of it is.
 
 ### Inserting instructions
 
