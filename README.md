@@ -78,7 +78,7 @@ Important for when looking at the hex, as you maybe confused by the order it app
 
 ### Stacks and Alignment
 
-Depending on the compiler options used when the binary was compiled, the stack might have to be aligned to a certain amount of bytes. Aligning it to 16 bytes is usually best, but it can be figured out by looking at any padding (stack memory declared but unused) used.
+Depending on the compiler options used when the binary was compiled, the stack might have to be aligned to a certain amount of bytes. Aligning it to 16 bytes is usually best, but it can be figured out by looking for any stack memory that was declared (as padding) and cleaned up without being used.
 
 Also a function call will push the return address onto the stack, you will need to remember to count that as well.
 
