@@ -8,7 +8,7 @@ Not really a guide, but a listing of each of the problems in no particular order
 
 For modifying the binary files. [HT](http://hte.sourceforge.net), comes with a builtin disassembler, allowing you to see the assembly representation of the hex code as you type.
 
-When editing a file, you cannot change the size of a file, otherwise it will throw memory offsets used by the instructions.
+When editing a file, you cannot change the size of a file, otherwise it will throw off memory offsets in the instructions.
 
 ### Assembler tool
 
