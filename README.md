@@ -47,9 +47,9 @@ It should be noted that the C/C++ source generated will not have completely vali
 
 ### Learning assembly
 
-There are two main assembly styles to choose from, Intel and AT&T. I prefer Intel as it is less cluttered, but once you have learned one you can look up the [differences](http://www.imada.sdu.dk/Courses/DM18/Litteratur/IntelnATT.htm) [(alt)](http://archive.is/f1dul) and be able to use the other.
+There are two main assembly styles to choose from, Intel and AT&T. I prefer Intel as it is less cluttered, but once you have learned one you can look up the [differences](http://www.imada.sdu.dk/Courses/DM18/Litteratur/IntelnATT.htm) ([archived](http://archive.is/f1dul)) and be able to use the other.
 
-Thw book *PC Assembly Language by Paul A. Carter* is freely available [here](http://pacman128.github.io/pcasm).
+The book [PC Assembly Language](http://pacman128.github.io/pcasm) by Paul A. Carter is freely available.
 
 ### Debugger
 
@@ -73,9 +73,9 @@ Useful to be able to get the pertinent information about your target binary.
 ELF files are broken into sections, at the top is the header which has information like 16/32/64 bit, endianness, machine, etc.
 
 Some information on ELF files:
-* [Linux ELF Object File Format (and ELF Header Structure) Basics](http://www.thegeekstuff.com/2012/07/elf-object-file-format)
-* [The 101 of ELF Binaries on Linux: Understanding and Analysis](https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis)
-* [Computer Science from the Bottom Up - Chapter 8. Behind the process - ELF](http://www.bottomupcs.com/elf.xhtml).
+* [Linux ELF Object File Format (and ELF Header Structure) Basics](http://www.thegeekstuff.com/2012/07/elf-object-file-format) ([archived](http://archive.is/tk3eF))
+* [The 101 of ELF Binaries on Linux: Understanding and Analysis](https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis) ([archived](http://archive.is/EOkmi))
+* [Computer Science from the Bottom Up - Chapter 8. Behind the process - ELF](http://www.bottomupcs.com/elf.xhtml) ([archived](http://archive.is/DBnia))
 
 ### Endianness
 
