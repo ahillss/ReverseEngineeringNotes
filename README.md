@@ -70,7 +70,7 @@ GDB uses the AT&T syntax, some useful commands are:
 
 Useful to be able to get the pertinent information about your target binary.
 
-ELF files are broken into sections, at the top is the header which has information like 16/32/64 bit, endianness, machine, etc. Some information on ELF files are [here](http://archive.is/wJW5i), [here](http://archive.is/JyChY) and [here](http://archive.is/DBnia).
+ELF files are broken into sections, at the top is the header which has information like 16/32/64 bit, endianness, machine, etc. Some information on ELF files are [here](http://www.thegeekstuff.com/2012/07/elf-object-file-format/), [here](https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis/) and [here](http://www.bottomupcs.com/elf.xhtml).
 
 ### Endianness
 
@@ -199,5 +199,13 @@ add    esp,0x10
 ```
 You will need to make room for this code in the binary. One strategy is to overwrtie a section of code that is easy to replicate in your shared library. The second strategy is to overwrite a section of code that won't be missed like  *command line options* handling code, while hard coding in any options you need to use in the binary or your shared library.
 
-### Classes and Structs
+### C++
+A good reference is [Inside the C++ Object Model 1st Edition](https://www.amazon.com/Inside-Object-Model-Stanley-Lippman/dp/0201834545) by Stanley B. Lippman
+
+#### Classes
+
+#### Temporary Objects
+
+#### Exceptions
+
 
