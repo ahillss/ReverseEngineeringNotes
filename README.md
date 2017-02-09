@@ -70,7 +70,12 @@ GDB uses the AT&T syntax, some useful commands are:
 
 Useful to be able to get the pertinent information about your target binary.
 
-ELF files are broken into sections, at the top is the header which has information like 16/32/64 bit, endianness, machine, etc. Some information on ELF files are [here](http://www.thegeekstuff.com/2012/07/elf-object-file-format/), [here](https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis/) and [here](http://www.bottomupcs.com/elf.xhtml).
+ELF files are broken into sections, at the top is the header which has information like 16/32/64 bit, endianness, machine, etc.
+
+Some information on ELF files:
+* [Linux ELF Object File Format (and ELF Header Structure) Basics](http://www.thegeekstuff.com/2012/07/elf-object-file-format)
+* [The 101 of ELF Binaries on Linux: Understanding and Analysis](https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis)
+* [Computer Science from the Bottom Up - Chapter 8. Behind the process - ELF](http://www.bottomupcs.com/elf.xhtml).
 
 ### Endianness
 
@@ -200,7 +205,10 @@ add    esp,0x10
 You will need to make room for this code in the binary. One strategy is to overwrtie a section of code that is easy to replicate in your shared library. The second strategy is to overwrite a section of code that won't be missed like  *command line options* handling code, while hard coding in any options you need to use in the binary or your shared library.
 
 ### C++
-A good reference is [Inside the C++ Object Model 1st Edition](https://www.amazon.com/Inside-Object-Model-Stanley-Lippman/dp/0201834545) by Stanley B. Lippman
+Some references
+* [Inside the C++ Object Model 1st Edition](https://www.amazon.com/Inside-Object-Model-Stanley-Lippman/dp/0201834545) by Stanley B. Lippman
+* [Reversing C++ Virtual Functions: Part 1](https://alschwalm.com/blog/static/2016/12/17/reversing-c-virtual-functions)
+* [Reversing C++ Virtual Functions: Part 2](https://alschwalm.com/blog/static/2017/01/24/reversing-c-virtual-functions-part-2-2)
 
 #### Classes
 
