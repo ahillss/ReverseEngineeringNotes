@@ -91,11 +91,11 @@ Another thing you might see after an a ```add esp,0x8``` is ```add esp,0xfffffff
 
 ### Executable start address
 
-When disassembling executables, the start address starts at```0x8048000```. Some disassemblers will start at ```0x0``` and others correctly (like **objdump**) at ```0x8048000```.
+Certain disassemblers may output the memory address next to the disassembled instructions, and some may incorrectly start at ```0x0```. Others like **objdump** should start at the correct address that is used at runtime.
 
-Hex editors all seem to start at ```0x0```, so to use the *goto address* feature you will need to convert the addresses in **objdump** by subtracting them with ```0x8048000```.
+For example X86 32-bit executables should start at ```0x8048000```.
 
-I believe shared libraries start from a different address.
+Also hex editors usually start at ```0x0```, so you may need to subtract for example ```0x8048000``` from an instructions address to find it in the hex editor.
 
 ### Global variables
 
