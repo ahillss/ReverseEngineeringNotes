@@ -103,11 +103,6 @@ Not only global variables, but static variables and string constants are also co
 
 The register ebx is usually used as an offset to them.
 
-Some resources:
-* [Position Independent Code on i386](http://archive.is/GZAvx)
-* [What is the Symbol Table and What is the Global Offset Table?](http://grantcurell.com/2015/09/21/what-is-the-symbol-table-and-what-is-the-global-offset-table/) ([archived](http://archive.is/Rrmm3))
-
-
 ```asm
 8051b00:	55                   	push   ebp
 8051b01:	89 e5                	mov    ebp,esp
@@ -132,6 +127,10 @@ Some resources:
 * the line ```call 8051b11``` pushes the ```eip``` value on to the stack and calls the next line ```pop ebx``` where it is popped off into the ebx register.
 
 Also note that decompiled source code (from **ida**) will often use a ```global``` variable. Which doesn't actually refer to the pointer value stored in```ebx``` as you would assume, but rather ```ebx + offset```. I do not know how the offset is calculated or what the significance of it is.
+
+Some resources:
+* [Position Independent Code on i386](http://archive.is/GZAvx)
+* [What is the Symbol Table and What is the Global Offset Table?](http://grantcurell.com/2015/09/21/what-is-the-symbol-table-and-what-is-the-global-offset-table/) ([archived](http://archive.is/Rrmm3))
 
 ### Inserting instructions
 
