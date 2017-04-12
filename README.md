@@ -101,7 +101,12 @@ Also hex editors usually start at ```0x0```, so you may need to subtract for exa
 
 Not only global variables, but static variables and string constants are also considered part of the global variables.
 
-The register ebx is usually used to store the address to it.
+The register ebx is usually used as an offset to them.
+
+Some resources:
+* [Position Independent Code on i386](http://archive.is/GZAvx)
+* [What is the Symbol Table and What is the Global Offset Table?](http://grantcurell.com/2015/09/21/what-is-the-symbol-table-and-what-is-the-global-offset-table/) ([archived](http://archive.is/Rrmm3))
+
 
 ```asm
 8051b00:	55                   	push   ebp
