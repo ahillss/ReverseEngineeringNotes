@@ -36,8 +36,9 @@ The assembly generated cannot just be plugged into an assembler due to that the 
 * ```-S``` ...
 * ```-D``` outputs everything, useful for seeing the hex values of global variables/data
 * ```-z``` doesn't strip out any uneccessary code, otherwise they are replaced with ellipses
+* ```-r``` resolves functions names?
 
-If you are reverse engineering an executable you can look for the function name you are interested in.
+If objdump doesn't work nicely with your win32 executables, you can try using [borg](http://www.caesum.com) instead.
 
 ### Decompiler
 
@@ -79,7 +80,7 @@ Some information on ELF files:
 
 ### Endianness
 
-Important for when looking at the hex, as you maybe confused by the order it appears. Your binaries are most likely using little-endian as it is what Intel CPUs use.
+Important for when looking at the hex, as you maybe confused by the order it appears. Your binaries are most likely using little-endian (what Intel CPUs use).
 
 ### Stacks and Alignment
 
