@@ -75,6 +75,8 @@ Some information on ELF files:
 
 Important for when looking at the hex, as you maybe confused by the order it appears. Your binaries are most likely using little-endian (what Intel CPUs use).
 
+For example in little-endian the integer ```54233456``` (or as hex ```0x33b8970```) will be stored as 4 bytes in this order ```0x70 0x89 0x3b 0x03```.
+
 ### Stacks and Alignment
 
 Depending on the compiler options used when the binary was compiled, the stack might have to be aligned to a certain amount of bytes. Aligning it to 16 bytes is usually best, but you can figured it out by looking for any stack memory that was declared (as padding) and cleaned up without being used.
