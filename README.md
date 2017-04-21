@@ -26,19 +26,11 @@ Also make sure to double check the generated hex by viewing it in a disassembler
 
 ### Disassembler
 
-To convert the binary representation of the instructions back into assembly. An easy to use one is objdump from [binutils](https://www.gnu.org/software/binutils).
+To convert the binary representation of the instructions back into assembly. An easy to use one is objdump from [binutils](https://www.gnu.org/software/binutils), e.g. ```objdump -M intel -S -D -z binary_file > dump.asm```.
+
+For win32 binaries you can also use [borg](http://www.caesum.com).
 
 The assembly generated cannot just be plugged into an assembler due to that the dissassembler may add additional information to the input to help in readability, data declarations may be reversed as assembly to produce nonsense instructions and amongst other problems.
-
-```objdump -M intel -S -D -z binary_file > dump.asm```
-
-*  ```-M intel``` tells it to output Intel assembly
-* ```-S``` ...
-* ```-D``` outputs everything, useful for seeing the hex values of global variables/data
-* ```-z``` doesn't strip out any uneccessary code, otherwise they are replaced with ellipses
-* ```-r``` resolves functions names?
-
-If objdump doesn't work nicely with your win32 executables, you can try using [borg](http://www.caesum.com) instead.
 
 ### Decompiler
 
