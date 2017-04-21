@@ -28,7 +28,7 @@ Also make sure to double check the generated hex by viewing it in a disassembler
 
 To convert the binary representation of the instructions back into assembly. 
 
-* objdump from [binutils](https://www.gnu.org/software/binutils), e.g. ```objdump -M intel -S -D -z binary_file > dump.asm```
+* objdump from [binutils](https://www.gnu.org/software/binutils) (e.g. ```objdump -M intel -S -D -z binary_file > dump.asm```)
 * [borg](http://www.caesum.com) for win32 binaries
 
 The assembly generated cannot just be plugged into an assembler due to that the dissassembler may add additional information to the input to help in readability, data declarations may be reversed as assembly to produce nonsense instructions and amongst other problems.
