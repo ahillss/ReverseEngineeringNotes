@@ -16,7 +16,8 @@ For converting assembly instructions into hex. The only tool I am aware of is [r
 
 It not only useful for converting basic instructions, but also instructions such as a near [jump](http://x86.renejeschke.de/html/file_module_x86_id_147.html) ([archived](http://archive.is/RLtmB)) or [call](http://x86.renejeschke.de/html/file_module_x86_id_26.html) ([archived](http://archive.is/r78Xf)), where the offset will need to be calculated.
 
-For example to call a function at ```0x8050e3c``` from address ```0x8051cee```, call ```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'``` to generate the hex ```e8 49 f1 ff ff```
+For example to call a function at ```0x8050e3c``` from address ```0x8051cee```:
+use ```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'``` to generate the hex ```e8 49 f1 ff ff```
 
 Also make sure to double check the generated hex by viewing it in a disassembler to make sure it is correct, I believe rasm2 might have problems in certain circumstances.
 
