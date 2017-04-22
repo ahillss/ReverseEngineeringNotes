@@ -12,15 +12,11 @@ When editing a file, you cannot change the size of a file, otherwise it will thr
 
 ### Assembler tool
 
-To convert assembly instructions into hex. The only tool I am aware of is [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from [radare2](https://radare.org).
+For converting assembly instructions into hex. The only tool I am aware of is [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from [radare2](https://radare.org).
 
 It not only useful for converting basic instructions, but also instructions such as a near [jump](http://x86.renejeschke.de/html/file_module_x86_id_147.html) ([archived](http://archive.is/RLtmB)) or [call](http://x86.renejeschke.de/html/file_module_x86_id_26.html) ([archived](http://archive.is/r78Xf)), where the offset will need to be calculated.
 
-For example to call a function at 0x8050e3c from address 0x8051cee:
-
-```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'```
-
-to generate the hex ```e8 49 f1 ff ff```
+For example to call a function at 0x8050e3c from address 0x8051cee, call ```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'``` to generate the hex ```e8 49 f1 ff ff```
 
 Also make sure to double check the generated hex by viewing it in a disassembler to make sure it is correct, I believe rasm2 might have problems in certain circumstances.
 
@@ -28,6 +24,7 @@ Also make sure to double check the generated hex by viewing it in a disassembler
 
 To convert the binary representation of the instructions back into assembly. 
 
+Two good free ones are:
 * objdump from [binutils](https://www.gnu.org/software/binutils) (e.g. ```objdump -M intel -S -D -z binary_file > dump.asm```)
 * [borg](http://www.caesum.com) for win32 binaries
 
@@ -43,7 +40,7 @@ It should be noted that the C/C++ source generated will not have completely vali
 
 There are two main assembly styles to choose from, Intel and AT&T. I prefer Intel as it is less cluttered, but once you have learned one you can look up the [differences](http://www.imada.sdu.dk/Courses/DM18/Litteratur/IntelnATT.htm) ([archived](http://archive.is/f1dul)) and be able to use the other.
 
-The book [PC Assembly Language](http://pacman128.github.io/pcasm/) by Paul A. Carter is freely available.
+For Intel style the book [PC Assembly Language](http://pacman128.github.io/pcasm/) by Paul A. Carter is freely available.
 
 ### Debugger
 
@@ -79,7 +76,7 @@ For example in little-endian the integer ```54233456``` (or as hex ```0x33b8970`
 
 ### Stacks and Alignment
 
-Depending on the compiler options used when the binary was compiled, the stack might have to be aligned to a certain amount of bytes. Aligning it to 16 bytes is usually best, but you can figured it out by looking for any stack memory that was declared (as padding) and cleaned up without being used.
+Depending on the compiler options used when the binary was compiled, the stack might have to be aligned to a certain amount of bytes. Aligning it to 16 bytes is usually best, but you can figured it out by looking for padding, that is any stack memory that was declared and cleaned up without being used.
 
 Also a function call will push the return address onto the stack, you will need to remember to count that as well.
 
