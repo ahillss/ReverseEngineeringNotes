@@ -1,4 +1,4 @@
-# Reverse Engineering Beginners Guide
+# Reverse Engineering Guide
 
 Not really a guide, but a listing of each of the problems in no particular order that I had to go through when learning to reverse engineer C++ code compiled to 32-bit X86 assembly.
 
