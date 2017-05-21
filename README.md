@@ -127,9 +127,9 @@ Some resources:
 
 ### Inserting instructions
 
-The easiest way to reverse engineer a binary is to replicate the code bit by bit (usually starting with the main function) in your own shared library. Then load the shared library and call your code from the binary file at runtime.
+The easiest way to reverse engineer a binary is to replicate the code bit by bit (usually starting with the main function) in your own shared library. You then load the shared library from the binary at runtime.
 
-The [OpenRCT](https://openrct2.org/) project [used](http://archive.is/SDuL0) a program called [CFF Explorer](http://www.ntcore.com/exsuite.php) to load their own DLL. But I am unaware of a similar project in Linux of which I am using, so I will show you how to modify the binary the binary to load your own shared library and call a function from it. I will be using the ```dlopen``` and ```dlsym``` functions, which your binary will need to have available (accessible from the executable). There is probably a way to load them if they are not there, but for now I am yet to figure out how.
+The [OpenRCT](https://openrct2.org/) project [used](http://archive.is/SDuL0) a program called [CFF Explorer](http://www.ntcore.com/exsuite.php) to load their own DLL. But I am unaware of a similar project for Linux, so I will show you how to modify the binary to load your own shared library and call a function from it. I will be using the ```dlopen``` and ```dlsym``` functions, which your binary will need to have available (accessible from the executable). There is probably a way to load them if they are not there, but I do not know how.
 
 The equivalent code in C will look like this:
 ```C
@@ -199,6 +199,24 @@ call   eax
 ;reclaim 4 bytes from sub, 12 bytes from pushes
 add    esp,0x10
 ```
+
+For ```call dlopen``` and ```call dlsym``` you will have to use their addresses as specified in the binary. You can search for their names in the disassembled binary. e.g. from objdump:
+
+```asm
+Disassembly of section .plt:
+
+08050e3c <dlsym@plt>:
+8050e3c:	ff 25 80 51 08 08    	jmp    DWORD PTR ds:0x8085180
+8050e42:	68 c0 00 00 00       	push   0xc0
+8050e47:	e9 60 fe ff ff       	jmp    8050cac <_init@@Base+0x30>
+ 
+0805150c <dlopen@plt>:
+805150c:	ff 25 34 53 08 08    	jmp    DWORD PTR ds:0x8085334
+8051512:	68 28 04 00 00       	push   0x428
+8051517:	e9 90 f7 ff ff       	jmp    8050cac <_init@@Base+0x30>
+
+```
+
 You will need to make room for this code in the binary. One strategy is to overwrtie a section of code that is easy to replicate in your shared library. The second strategy is to overwrite a section of code that won't be missed like  *command line options* handling code, while hard coding in any options you need to use in the binary or your shared library.
 
 ### C++
