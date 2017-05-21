@@ -6,21 +6,21 @@ Not really a guide, but a listing of each of the problems in no particular order
 
 ### Hex editor
 
-For modifying the binary files. [HT](http://hte.sourceforge.net), comes with a builtin disassembler, allowing you to see the assembly representation of the hex code as you type.
+To modify the binary files. A good one is [HT](http://hte.sourceforge.net), it comes with a builtin disassembler, allowing you to see the assembly representation of the hex code as you type.
 
-When editing a file, you cannot change the size of a file, otherwise it will throw off memory offsets in the instructions.
+Note you cannot change the size of a file, otherwise it will throw off memory offsets for the instructions.
 
 ### Assembler tool
 
-For converting assembly instructions into hex. The only tool I am aware of is [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from [radare2](https://radare.org).
+A tool to For conver assembly instructions into hex. The only one I am aware of is [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from [radare2](https://radare.org).
 
-It not only useful for converting basic instructions, but also instructions such as a near [jump](http://x86.renejeschke.de/html/file_module_x86_id_147.html) ([archived](http://archive.is/RLtmB)) or [call](http://x86.renejeschke.de/html/file_module_x86_id_26.html) ([archived](http://archive.is/r78Xf)), where the offset will need to be calculated.
+It not only useful for converting simple instructions, but also ```jmp``` and ```call``` instructions, where the offset will need to be calculated.
 
 For example to call a function at ```0x8050e3c``` from address ```0x8051cee``` use:
 
 ```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'``` to generate the hex ```e8 49 f1 ff ff```
 
-Also make sure to double check the generated hex by viewing it in a disassembler to make sure it is correct, I believe rasm2 might have problems in certain circumstances.
+A note of warning tha rasm2 might have issues with some/invalid instructions where it will output the hex for instructions it supports and not what you gave it.
 
 ### Disassembler
 
@@ -30,17 +30,17 @@ Two good free ones are:
 * objdump from [binutils](https://www.gnu.org/software/binutils) (e.g. ```objdump -M intel -S -D -z binary_file > dump.asm```)
 * [borg](http://www.caesum.com) for win32 binaries
 
-The assembly generated cannot just be plugged into an assembler due to that the dissassembler may add additional information to the input to help in readability, data declarations may be reversed as assembly to produce nonsense instructions and amongst other problems.
+The disaseembled assembly cannot used with an assembler due to the data sections being interpreted as instructions and also disassemblers sometimes insert extra information or instructions that aren't always valid assembly.
 
 ### Decompiler
 
-Useful to see the structure of the code, identitfy externed global variables from libraries or to identify class virtual tables which can be difficult to discern from the assembly only. A good one is [IDA](https://www.hex-rays.com/products/ida/).
+Reading vast amounts of code from the disassembly can be difficult, a decompiler can make that job much easier. It can also be useful for identifying global variables (from libraries) and class virtual tables. A good one is [IDA](https://www.hex-rays.com/products/ida/).
 
-It should be noted that the C/C++ source generated will not have completely valid syntax and will often be missing type information (except for their byte sizes).
+The C/C++ source generated will not have completely valid syntax and will often be missing type information (except for their byte sizes).
 
 ### Learning assembly
 
-There are two main assembly styles to choose from, Intel and AT&T. I prefer Intel as it is less cluttered, but once you have learned one you can look up the [differences](http://www.imada.sdu.dk/Courses/DM18/Litteratur/IntelnATT.htm) ([archived](http://archive.is/f1dul)) and be able to use the other.
+There are two main assembly styles to choose from, Intel and AT&T. I prefer Intel as it is less cluttered, but once you have learned one you can look up the [differences](http://www.imada.sdu.dk/Courses/DM18/Litteratur/IntelnATT.htm) ([archived](http://archive.is/f1dul)) and have no trouble using the other.
 
 For Intel style the book [PC Assembly Language](http://pacman128.github.io/pcasm/) by Paul A. Carter is freely available.
 
@@ -61,8 +61,6 @@ GDB uses the AT&T syntax, some useful commands are:
 
 ### Layout of the executable or library binary
 
-Useful to be able to get the pertinent information about your target binary.
-
 ELF files are broken into sections, at the top is the header which has information like 16/32/64 bit, endianness, machine, etc.
 
 Some information on ELF files:
@@ -78,11 +76,11 @@ For example in little-endian the integer ```54233456``` (or as hex ```0x33b8970`
 
 ### Stacks and Alignment
 
-Depending on the compiler options used when the binary was compiled, the stack might have to be aligned to a certain amount of bytes. Aligning it to 16 bytes is usually best, but you can figured it out by looking for padding, that is any stack memory that was declared and cleaned up without being used.
+Depending on the compiler options used when the binary was compiled, the stack may have to be aligned to a certain amount of bytes. Aligning it to 16 bytes is usually best, but you can figured it out by looking for padding (any stack memory that was declared and cleaned up without being used).
 
 Also a function call will push the return address onto the stack, you will need to remember to count that as well.
 
-Another thing you might see after an a ```add esp,0x8``` is ```add esp,0xfffffff8```. This is just using the unsigned integer overflow where it wraps around, it is the same as ```sub esp,0x8```.
+Another thing you might see is the stack being modfied like ```add esp,0xfffffff8```, this is just using the unsigned integer overflow where it wraps around, it is the same as ```sub esp,0x8```.
 
 ### Executable start address
 
