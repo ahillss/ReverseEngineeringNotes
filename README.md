@@ -6,21 +6,21 @@ Not really a guide, but a listing of each of the problems in no particular order
 
 ### Hex editor
 
-To modify the binary files. A good one is [HT](http://hte.sourceforge.net), it comes with a builtin disassembler, allowing you to see the assembly representation of the hex code as you type.
+To modify the binary files you will need a hex editor. A good one is [HT](http://hte.sourceforge.net) that comes with a builtin disassembler, so you can see the assembly representation of the hex code as you type.
 
-Note you cannot change the size of a file, otherwise it will throw off memory offsets for the instructions.
+Note when modifying the binary files you cannot change the file size or move around blocks of instructions, as it will throw off memory offsets used with the instructions.
 
 ### Assembler tool
 
-A tool to For conver assembly instructions into hex. The only one I am aware of is [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from [radare2](https://radare.org).
+For converting assembly instructions into hex. The only one I am aware of is [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from [radare2](https://radare.org).
 
-It not only useful for converting simple instructions, but also ```jmp``` and ```call``` instructions, where the offset will need to be calculated.
+It not only useful for converting simple instructions, but also ```jmp``` and ```call``` instructions, where the memory offsets will need to be calculated depending on the location of the instruction.
 
 For example to call a function at ```0x8050e3c``` from address ```0x8051cee``` use:
 
 ```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'``` to generate the hex ```e8 49 f1 ff ff```
 
-A note of warning tha rasm2 might have issues with some/invalid instructions where it will output the hex for instructions it supports and not what you gave it.
+A note of warning that rasm2 might have issues with some instructions where it will still output something but not what you gave it (I believe it occurs when dereferencing an operand for certain instructions).
 
 ### Disassembler
 
@@ -30,23 +30,23 @@ Two good free ones are:
 * objdump from [binutils](https://www.gnu.org/software/binutils) (e.g. ```objdump -M intel -S -D -z binary_file > dump.asm```)
 * [borg](http://www.caesum.com) for win32 binaries
 
-The disaseembled assembly cannot used with an assembler due to the data sections being interpreted as instructions and also disassemblers sometimes insert extra information or instructions that aren't always valid assembly.
+Note that the disassembled assembly cannot be used with an assembler due to the data sections being interpreted as instructions and also disassemblers sometimes insert extra information or instructions that aren't always valid assembly but are useful for the user.
 
 ### Decompiler
 
-Reading vast amounts of code from the disassembly can be difficult, a decompiler can make that job much easier. It can also be useful for identifying global variables (from libraries) and class virtual tables. A good one is [IDA](https://www.hex-rays.com/products/ida/).
+Reading vast amounts of code from the disassembly can be difficult, a decompiler can make that job much easier, especially for following control flow. It can also be useful for identifying global variables (from libraries) and class virtual tables. A good one is [IDA](https://www.hex-rays.com/products/ida/).
 
-The C/C++ source generated will not have completely valid syntax and will often be missing type information (except for their byte sizes).
+The C/C++ source generated will not have completely valid syntax (inserting extra information) and will often be missing type information (except for their byte sizes).
 
 ### Learning assembly
 
 There are two main assembly styles to choose from, Intel and AT&T. I prefer Intel as it is less cluttered, but once you have learned one you can look up the [differences](http://www.imada.sdu.dk/Courses/DM18/Litteratur/IntelnATT.htm) ([archived](http://archive.is/f1dul)) and have no trouble using the other.
 
-For Intel style the book [PC Assembly Language](http://pacman128.github.io/pcasm/) by Paul A. Carter is freely available.
+For Intel the book [PC Assembly Language](http://pacman128.github.io/pcasm/) by Paul A. Carter is freely available.
 
 ### Debugger
 
-For debugging problems you introduce, or for looking at the registers, stack and heap values at runtime. A good one is  [GDB](https://www.gnu.org/software/gdb).
+For debugging problems you may introduce, or for looking at the registers, stack and heap values at runtime. A good one is  [GDB](https://www.gnu.org/software/gdb).
 
 GDB uses the AT&T syntax, some useful commands are:
 * ```run``` - to start the program
@@ -78,7 +78,7 @@ For example in little-endian the integer ```54233456``` (or as hex ```0x33b8970`
 
 Depending on the compiler options used when the binary was compiled, the stack may have to be aligned to a certain amount of bytes. Aligning it to 16 bytes is usually best, but you can figured it out by looking for padding (any stack memory that was declared and cleaned up without being used).
 
-Also a function call will push the return address onto the stack, you will need to remember to count that as well.
+Be aware that function calls will push the return address onto the stack, you will need to remember to count them as well.
 
 Another thing you might see is the stack being modfied like ```add esp,0xfffffff8```, this is just using the unsigned integer overflow where it wraps around, it is the same as ```sub esp,0x8```.
 
@@ -86,13 +86,13 @@ Another thing you might see is the stack being modfied like ```add esp,0xfffffff
 
 Certain disassemblers output the memory address next to the disassembled instructions. Some incorrectly start at ```0x0``` and others like **objdump** give the correct address used at runtime.
 
-For example X86 32-bit executables should start at ```0x8048000```.
+For example X86 32-bit executables (I believe) should start at ```0x8048000```.
 
 Also hex editors usually start at ```0x0```, so you may need to subtract for example ```0x8048000``` from an instruction's address to find it in the hex editor.
 
 ### Global variables
 
-Not only global variables, but static variables and string constants are also considered part of the global variables.
+Not only global variables, but static variables and string constants are also part of the global variables.
 
 The register ebx is usually used as an offset to them.
 
@@ -217,7 +217,7 @@ Disassembly of section .plt:
 
 ```
 
-You will need to make room for this code in the binary. One strategy is to overwrtie a section of code that is easy to replicate in your shared library. The second strategy is to overwrite a section of code that won't be missed like  *command line options* handling code, while hard coding in any options you need to use in the binary or your shared library.
+You will need to make room for this code in the binary. One strategy is to overwrite a section of code that is easy to replicate in your shared library. The second strategy is to overwrite a section of code that won't be missed like  *command line options* handling code, while hard coding in any options you need to use in the binary or your shared library.
 
 ### C++
 Some references
@@ -227,8 +227,14 @@ Some references
 
 #### Classes
 
+TODO
+
 #### Temporary Objects
 
+TODO
+
 #### Exceptions
+
+TODO
 
 
