@@ -4,13 +4,13 @@ Not really a guide, but a listing of each of the problems in no particular order
 
 *Note: this is a work in progress.*
 
-### Hex editor
+## Hex editor
 
 To modify the binary files you will need a hex editor. A good one is [HT](http://hte.sourceforge.net) that comes with a builtin disassembler, so you can see the assembly representation of the hex code as you type.
 
 Note when modifying the binary files you cannot change the file size or move around blocks of instructions, as it will throw off memory offsets used with the instructions.
 
-### Assembler tool
+## Assembler tool
 
 For converting assembly instructions into hex. The only one I am aware of is [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from [radare2](https://radare.org).
 
@@ -22,7 +22,7 @@ For example to call a function at ```0x8050e3c``` from address ```0x8051cee``` u
 
 A note of warning that rasm2 might have issues with some instructions where it will still output something but not what you gave it (I believe it occurs when dereferencing an operand for certain instructions).
 
-### Disassembler
+## Disassembler
 
 To convert the binary representation of the instructions back into assembly. 
 
@@ -32,19 +32,19 @@ Two good free ones are:
 
 Note that the disassembled assembly cannot be used with an assembler due to the data sections being interpreted as instructions and also disassemblers sometimes insert extra information or instructions that aren't always valid assembly but are useful for the user.
 
-### Decompiler
+## Decompiler
 
 Reading vast amounts of code from the disassembly can be difficult, a decompiler can make that job much easier, especially for following control flow. It can also be useful for identifying global variables (from libraries) and class virtual tables. A good one is [IDA](https://www.hex-rays.com/products/ida/).
 
 The C/C++ source generated will not have completely valid syntax (inserting extra information) and will often be missing type information (except for their byte sizes).
 
-### Learning assembly
+## Learning assembly
 
 There are two main assembly styles to choose from, Intel and AT&T. I prefer Intel as it is less cluttered, but once you have learned one you can look up the [differences](http://www.imada.sdu.dk/Courses/DM18/Litteratur/IntelnATT.htm) ([archived](http://archive.is/f1dul)) and have no trouble using the other.
 
 For Intel the book [PC Assembly Language](http://pacman128.github.io/pcasm/) by Paul A. Carter is freely available.
 
-### Debugger
+## Debugger
 
 For debugging problems you may introduce, or for looking at the registers, stack and heap values at runtime. A good one is  [GDB](https://www.gnu.org/software/gdb).
 
@@ -59,7 +59,7 @@ GDB uses the AT&T syntax, some useful commands are:
 * ```frame 0``` - change frame to the integer provided
 * ```bt``` - a stack trace
 
-### Layout of the executable or library binary
+## Layout of the executable or library binary
 
 ELF files are broken into sections, at the top is the header which has information like 16/32/64 bit, endianness, machine, etc.
 
@@ -68,13 +68,13 @@ Some information on ELF files:
 * [The 101 of ELF Binaries on Linux: Understanding and Analysis](https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis/) ([archived](http://archive.is/EOkmi))
 * [Computer Science from the Bottom Up - Chapter 8. Behind the process - ELF](http://www.bottomupcs.com/elf.xhtml) ([archived](http://archive.is/DBnia))
 
-### Endianness
+## Endianness
 
 Important for when looking at the hex, as you maybe confused by the order it appears. Your binaries are most likely using little-endian (what Intel CPUs use).
 
 For example in little-endian the integer ```54233456``` (or as hex ```0x33b8970```) will be stored as 4 bytes in this order ```0x70 0x89 0x3b 0x03```.
 
-### Stacks and Alignment
+## Stacks and Alignment
 
 Depending on the compiler options used when the binary was compiled, the stack may have to be aligned to a certain amount of bytes. Aligning it to 16 bytes is usually best, but you can figured it out by looking for padding (any stack memory that was declared and cleaned up without being used).
 
@@ -82,7 +82,7 @@ Be aware that function calls will push the return address onto the stack, you wi
 
 Another thing you might see is the stack being modfied like ```add esp,0xfffffff8```, this is just using the unsigned integer overflow where it wraps around, it is the same as ```sub esp,0x8```.
 
-### Executable start address
+## Executable start address
 
 Certain disassemblers output the memory address next to the disassembled instructions. Some incorrectly start at ```0x0``` and others like **objdump** give the correct address used at runtime.
 
@@ -90,7 +90,7 @@ For example X86 32-bit executables (I believe) should start at ```0x8048000```.
 
 Also hex editors usually start at ```0x0```, so you may need to subtract for example ```0x8048000``` from an instruction's address to find it in the hex editor.
 
-### Global variables
+## Global variables
 
 Not only global variables, but static variables and string constants are also part of the global variables.
 
@@ -125,7 +125,7 @@ Some resources:
 * [Position Independent Code on i386](http://archive.is/GZAvx)
 * [What is the Symbol Table and What is the Global Offset Table?](http://grantcurell.com/2015/09/21/what-is-the-symbol-table-and-what-is-the-global-offset-table/) ([archived](http://archive.is/Rrmm3))
 
-### Inserting instructions
+## Inserting instructions
 
 The easiest way to reverse engineer a binary is to replicate the code bit by bit (usually starting with the main function) in your own shared library. You then load the shared library from the binary at runtime.
 
@@ -219,21 +219,21 @@ Disassembly of section .plt:
 
 You will need to make room for this code in the binary. One strategy is to overwrite a section of code that is easy to replicate in your shared library. The second strategy is to overwrite a section of code that won't be missed like  *command line options* handling code, while hard coding in any options you need to use in the binary or your shared library.
 
-### C++
+## C++
 Some references
 * [Inside the C++ Object Model 1st Edition](https://www.amazon.com/Inside-Object-Model-Stanley-Lippman/dp/0201834545) by Stanley B. Lippman
 * [Reversing C++ Virtual Functions: Part 1](https://alschwalm.com/blog/static/2016/12/17/reversing-c-virtual-functions/) ([archived](http://archive.is/ezxOe))
 * [Reversing C++ Virtual Functions: Part 2](https://alschwalm.com/blog/static/2017/01/24/reversing-c-virtual-functions-part-2-2/) ([archived](http://archive.is/T9wsl))
 
-#### Classes
+### Classes
 
 TODO
 
-#### Temporary Objects
+### Temporary Objects
 
 TODO
 
-#### Exceptions
+### Exceptions
 
 TODO
 
