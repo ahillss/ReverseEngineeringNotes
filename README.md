@@ -34,9 +34,9 @@ Note that the disassembled assembly cannot be used with an assembler due to the 
 
 ## Decompiler
 
-Reading vast amounts of code from the disassembly can be difficult, a decompiler can make that job much easier, especially for following control flow. It can also be useful for identifying global variables (from libraries) and class virtual tables. A good one is [IDA](https://www.hex-rays.com/products/ida/).
+Reading vast amounts of code from the disassembly can be difficult, a decompiler can make that job much easier, especially for following control flow. It can also be useful for identifying global variables and the virtual tables of classes. A good one is [IDA](https://www.hex-rays.com/products/ida/).
 
-The C/C++ source generated will not have completely valid syntax (inserting extra information) and will often be missing type information (except for their byte sizes).
+The C/C++ source generated will not have completely valid syntax (as extra information is inserted) and will often be missing type information (except for their byte sizes).
 
 ## Learning assembly
 
