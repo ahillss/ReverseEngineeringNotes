@@ -8,7 +8,7 @@ Not really a guide, but a listing of each of the problems in no particular order
 
 To modify the binary files you will need a hex editor. A good one is [HT](http://hte.sourceforge.net) that comes with a builtin disassembler, so you can see the assembly representation of the hex code as you type.
 
-Note when modifying the binary files you cannot change the file size or move around blocks of instructions, as it will throw off memory offsets used with the instructions.
+Note when modifying the binary files you cannot change the file size or move around blocks of instructions, as it will throw off memory offsets used in the instructions.
 
 ## Assembler tool
 
