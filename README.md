@@ -7,7 +7,7 @@ Not really a guide, but a listing of each of the problems in no particular order
 ## Hex editor
 
 To modify the binary files you will need a hex editor. 
-* [HT](http://hte.sourceforge.net) that comes with a builtin disassembler, so you can see the assembly representation of the hex code as you type.
+* [HT](https://github.com/sebastianbiallas/ht) that comes with a builtin disassembler, so you can see the assembly representation of the hex code as you type.
 * [beye](http://beye.sourceforge.net) is very similar to HT, but it frequently crashed when I used it.
 
 Note when modifying the binary files you cannot change the file size or move around blocks of instructions, as it will throw off memory offsets used in the instructions.
