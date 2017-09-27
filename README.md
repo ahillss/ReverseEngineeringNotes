@@ -134,6 +134,7 @@ The easiest way to reverse engineer a binary is to replicate the code bit by bit
 The [OpenRCT](https://openrct2.org/) project [used](http://archive.is/SDuL0) a program called [CFF Explorer](http://www.ntcore.com/exsuite.php) to load their own DLL. But I am unaware of a similar project for Linux, so I will show you how to modify the binary to load your own shared library and call a function from it. I will be using the ```dlopen``` and ```dlsym``` functions, which your binary will need to have available (accessible from the executable). There is probably a way to load them if they are not there, but I do not know how.
 
 The equivalent code in C will look like this:
+
 ```C
 int main(int argc, char *argv[]) {
     //...
@@ -145,6 +146,7 @@ int main(int argc, char *argv[]) {
     //...
 }
 ```
+
 The same code in assembly, but with a few minor tweaks:
 
 ```asm
@@ -221,8 +223,8 @@ Disassembly of section .plt:
 
 You will need to make room for your code in the binary. One strategy is to overwrite a section of code that is easy to replicate in your shared library. The second strategy is to overwrite a section of code that won't be missed like  *command line options* handling code, while hard coding in any options you need to use in the binary or your shared library.
 
-## C++
-Some references
+## C++ References
+
 * [Inside the C++ Object Model 1st Edition](https://www.amazon.com/Inside-Object-Model-Stanley-Lippman/dp/0201834545) by Stanley B. Lippman
 * [Reversing C++ Virtual Functions: Part 1](https://alschwalm.com/blog/static/2016/12/17/reversing-c-virtual-functions/) ([archived](http://archive.is/ezxOe))
 * [Reversing C++ Virtual Functions: Part 2](https://alschwalm.com/blog/static/2017/01/24/reversing-c-virtual-functions-part-2-2/) ([archived](http://archive.is/T9wsl))
