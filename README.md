@@ -219,7 +219,7 @@ Disassembly of section .plt:
 
 ```
 
-You will need to make room for this code in the binary. One strategy is to overwrite a section of code that is easy to replicate in your shared library. The second strategy is to overwrite a section of code that won't be missed like  *command line options* handling code, while hard coding in any options you need to use in the binary or your shared library.
+You will need to make room for your code in the binary. One strategy is to overwrite a section of code that is easy to replicate in your shared library. The second strategy is to overwrite a section of code that won't be missed like  *command line options* handling code, while hard coding in any options you need to use in the binary or your shared library.
 
 ## C++
 Some references
