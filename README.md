@@ -227,18 +227,6 @@ Some references
 * [Reversing C++ Virtual Functions: Part 1](https://alschwalm.com/blog/static/2016/12/17/reversing-c-virtual-functions/) ([archived](http://archive.is/ezxOe))
 * [Reversing C++ Virtual Functions: Part 2](https://alschwalm.com/blog/static/2017/01/24/reversing-c-virtual-functions-part-2-2/) ([archived](http://archive.is/T9wsl))
 
-### Classes
-
-TODO
-
-### Temporary Objects
-
-TODO
-
-### Exceptions
-
-TODO
-
 ## Library based disassembler
 
 For writing your own disassembly tools and automating disassembly tasks.
