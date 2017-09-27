@@ -240,12 +240,7 @@ TODO
 TODO
 
 ## Library based disassembler
-I am currently looking at [distorm](https://github.com/gdabah/distorm) where you can disassemble a binary and do something with the output directly in python, unlike the standalone disassemblers where you need to go through the disassembly by hand.
 
-There is the potential to write a customised disassembler for the specific binaries you are working on where tasks can be automated, such as:
+For writing your own disassembly tools and automating disassembly tasks.
 
-* extracting global variables
-* rewriting the disassembly so it can be reassembled outside the binary by:
-* * removing and/or redirecting their global references
-* * updating ```call``` and ```jmp``` instruction's memory offsets
-* * copying c++ class/vtable information
+[Distorm](https://github.com/gdabah/distorm) can be used with python and other languages.
