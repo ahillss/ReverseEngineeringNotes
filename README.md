@@ -8,9 +8,11 @@ Not really a guide, but a listing of each of the problems in no particular order
 
 To modify the binary files you will need a hex editor.
 
-A good one is [HT](https://github.com/sebastianbiallas/ht) that comes with a builtin disassembler, so you can see the assembly representation of the hex code as you type. There is also [beye](http://beye.sourceforge.net) which also has a disassembler but frequently crashes. 
+A good one is [HT](https://github.com/sebastianbiallas/ht) which comes with a builtin disassembler where you can see the assembly representation of the hex code as you type.
 
-Note that HT's disassembler runs on the whole file, disassembling not only the code, but also incorrectly on the header, data etc as well. I'm not sure why the the header being disassembled doesn't through off the disassembler's alignment with the code, but it doesn't seem to be a problem.
+Note that HT's disassembler runs on the whole file, disassembling not only the code, but also incorrectly on the header, data etc as well. I'm not sure why the the header being disassembled doesn't throw off the disassembler's alignment with the code, but it doesn't seem to be a problem.
+
+There is also [beye](http://beye.sourceforge.net) which also has a disassembler but frequently crashes.
 
 When modifying binary files, you cannot change the file size or move around blocks of instructions, as it will throw off memory offsets used in the instructions.
 
