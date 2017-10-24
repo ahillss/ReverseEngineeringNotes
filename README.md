@@ -65,15 +65,15 @@ GDB uses the AT&T syntax, some useful commands are:
 * ```frame 0``` - change frame to the integer provided
 * ```bt``` - a stack trace
 
-## Layout of the executable or library binary
+## Layout of executables and libraries
 
-Binary executable and library formats tend to contain a series of headers detailing information like versions, 16/32/64 bit, endianness, machine, linked libraries, code/data section locations, etc. After the headers or in between are code/data section and other information like resources etc.
+Binary executable and library formats tend to contain a series of headers detailing information like versions, 16/32/64 bit, endianness, machine, linked libraries, code/data section locations, etc. After the headers or (maybe) in between are code/data section and other information like resources etc.
 
-Typically on Linux the **Executable and Linkable file Format (ELF)** is used and on Windows the **Portable Executable (PE) file format** is used.
+Typically on Linux the **Executable and Linkable file Format (ELF)** is used and on Windows the **Portable Executable (PE) file format**.
 
-An excellent resource for **PE** is [The Portable Executable File Format from Top to Bottom by Randy Kath](http://www.csn.ul.ie/~caolan/pub/winresdump/winresdump/doc/pefile2.html) [(archived)](https://archive.is/uwMRp).
+An excellent resource for **PE file format** is [The Portable Executable File Format from Top to Bottom by Randy Kath](http://www.csn.ul.ie/~caolan/pub/winresdump/winresdump/doc/pefile2.html) [(archived)](https://archive.is/uwMRp).
 
-Some information on ELF files can be [found here](http://www.bottomupcs.com/elf.xhtml)
+Some information on the **ELF file format** can be [found here](http://www.bottomupcs.com/elf.xhtml)
 
 ## Endianness
 
