@@ -67,7 +67,7 @@ GDB uses the AT&T syntax, some useful commands are:
 
 ## Layout of executables and libraries
 
-Binary executable and library formats tend to contain a series of headers detailing information like versions, 16/32/64 bit, endianness, machine, linked libraries, code/data section locations, virtual memory offsets, etc. After the headers or (maybe) in between are code/data section and other information like resources etc.
+Binary executable and library formats tend to contain a series of headers detailing information like versions, 16/32/64 bit, endianness, machine, linked libraries, code/data section locations, virtual memory offsets, etc. After the headers or (maybe) in between are code/data section and other data like resources etc.
 
 Typically used on Linux is the **Executable** and **Linkable** file **Format (ELF)** and on Windows the **Portable Executable (PE)** file format.
 
