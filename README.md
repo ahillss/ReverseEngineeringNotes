@@ -67,12 +67,13 @@ GDB uses the AT&T syntax, some useful commands are:
 
 ## Layout of the executable or library binary
 
-ELF files are broken into sections, at the top is the header which has information like 16/32/64 bit, endianness, machine, etc.
+Binary executable and library formats tend to contain a series of headers detailing information like versions, 16/32/64 bit, endianness, machine, linked libraries, code/data section locations, etc. After the headers or in between are code/data section and other information like resources etc.
 
-Some information on ELF files:
-* [Linux ELF Object File Format (and ELF Header Structure) Basics](http://www.thegeekstuff.com/2012/07/elf-object-file-format/) ([archived](http://archive.is/tk3eF))
-* [The 101 of ELF Binaries on Linux: Understanding and Analysis](https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis/) ([archived](http://archive.is/EOkmi))
-* [Computer Science from the Bottom Up - Chapter 8. Behind the process - ELF](http://www.bottomupcs.com/elf.xhtml) ([archived](http://archive.is/DBnia))
+Typically on Linux the **Executable and Linkable file Format (ELF)** is used and on Windows the **Portable Executable (PE) file format** is used.
+
+An excellent resource for **PE** is [The Portable Executable File Format from Top to Bottom by Randy Kath](http://www.csn.ul.ie/~caolan/pub/winresdump/winresdump/doc/pefile2.html) [(archived)](https://archive.is/uwMRp).
+
+Some information on ELF files can be [found here](http://www.bottomupcs.com/elf.xhtml)
 
 ## Endianness
 
