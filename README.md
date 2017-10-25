@@ -16,17 +16,11 @@ There is also [beye](http://beye.sourceforge.net) which also has a disassembler 
 
 When modifying binary files, you cannot change the file size or move around blocks of instructions, as it will throw off memory offsets used in the instructions.
 
-## Assembler tool
+## Radare
 
-For converting assembly instructions into hex. The only one I am aware of is [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from [radare2](https://radare.org).
+[Radare](https://radare.org) is collection of very useful utilities.
 
-It not only useful for converting simple instructions, but also ```jmp``` and ```call``` instructions, where the memory offsets will need to be calculated depending on the location of the instruction.
-
-For example to call a function at ```0x8050e3c``` from address ```0x8051cee``` use:
-
-```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'``` to generate the hex ```e8 49 f1 ff ff```
-
-A note of warning that rasm2 might have issues with some instructions where it will still output something but not what you gave it (I believe it occurs when dereferencing an operand for certain instructions).
+* [rasm2](https://github.com/radare/radare2/wiki/Rasm2) generates hex code from assembly. e.g. to call a function at ```0x8050e3c``` from address ```0x8051cee``` you would use ```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'``` to generate the hex ```e8 49 f1 ff ff```. Something to be aware, I had some trouble where entered assembly (involving dereferencing a pointer) that either was invalid or rasm2 didn't support, and it generated code sans the dereferencing part.
 
 ## Disassembler
 
