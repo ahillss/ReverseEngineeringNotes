@@ -136,7 +136,7 @@ Some resources:
 
 The easiest way to reverse engineer a binary is to replicate the code bit by bit (usually starting with the main function) in your own shared library. You then load the shared library from the binary at runtime.
 
-To find the main function you can either search for "main" within the disassembled executable, or use ```rabin2 -M exefile``` to get the physical and virtual addresses.
+To find the main function you can either search for "main" within the disassembled executable, or use ```rabin2 -M exefile``` (to get the physical and virtual addresses).
 
 The [OpenRCT](https://openrct2.org/) project [used](http://archive.is/SDuL0) a program called [CFF Explorer](http://www.ntcore.com/exsuite.php) to load their own DLL. But I am unaware of a similar project for Linux, so I will show you how to modify the binary to load your own shared library and call a function from it. I will be using the ```dlopen``` and ```dlsym``` functions, which your binary will need to have available (accessible from the executable). There is probably a way to load them if they are not there, but I do not know how.
 
