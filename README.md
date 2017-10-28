@@ -129,7 +129,7 @@ The register ebx is usually used as an offset to them.
 Also note that decompiled source code (from **ida**) will often use a ```global``` variable. Which doesn't actually refer to the pointer value stored in```ebx``` as you would assume, but rather ```ebx + offset```. I do not know how the offset is calculated or what the significance of it is.
 
 Some resources:
-* [Position Independent Code on i386](http://archive.is/GZAvx)
+* [Position Independent Code on i386](http://archive.is/GZAvx) ([archived](https://web.archive.org/web/20160315011254/http://www.greyhat.ch/lab/downloads/pic.html))
 * [What is the Symbol Table and What is the Global Offset Table?](http://grantcurell.com/2015/09/21/what-is-the-symbol-table-and-what-is-the-global-offset-table/) ([archived](http://archive.is/Rrmm3))
 
 ## Inserting instructions
