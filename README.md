@@ -8,19 +8,13 @@ Not really a guide, but a listing of each of the problems in no particular order
 
 To modify the binary files you will need a hex editor.
 
-A good one is [HT](https://github.com/sebastianbiallas/ht) which comes with a builtin disassembler where you can see the assembly representation of the hex code as you type.
+A good one is [HT](https://github.com/sebastianbiallas/ht) which comes with a builtin disassembler where you can see the assembly representation of the hex code as you type. It also allows you to view the executable/library file headers, but the virtual address seems to be off compared to what is outputted from other tools.
 
-Note that HT's disassembler runs on the whole file, disassembling not only the code, but also incorrectly on the header, data etc as well. I'm not sure why the the header being disassembled doesn't throw off the disassembler's alignment with the code, but it doesn't seem to be a problem.
+Note like many other disassemblers, HT's one also runs on the whole file, disassembling not only the code, but also incorrectly on the header, data etc as well.
 
 There is also [beye](http://beye.sourceforge.net) which also has a disassembler but frequently crashes.
 
 When modifying binary files, you cannot change the file size or move around blocks of instructions, as it will throw off memory offsets used in the instructions.
-
-## Radare
-
-[Radare](https://radare.org) is collection of very useful utilities.
-
-* [rasm2](https://github.com/radare/radare2/wiki/Rasm2) generates hex code from assembly. e.g. to call a function at ```0x8050e3c``` from address ```0x8051cee``` you would use ```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'``` to generate the hex ```e8 49 f1 ff ff```. Something to be aware, I had some trouble where entered assembly (involving dereferencing a pointer) that either was invalid or rasm2 didn't support, and it generated code sans the dereferencing part.
 
 ## Disassembler
 
@@ -59,6 +53,14 @@ GDB uses the AT&T syntax, some useful commands are:
 * ```frame 0``` - change frame to the integer provided
 * ```bt``` - a stack trace
 
+## Calculating hex for instructions
+
+To modify a binary using a hex editor, you will need to know the hex codes for each instruction. This can be done using [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from the [Radare](https://radare.org) collection of disassembly tools.
+
+e.g. to call a function at ```0x8050e3c``` from address ```0x8051cee``` you would use ```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'``` to generate the hex ```e8 49 f1 ff ff```.
+
+Something to be aware, I had some trouble where entered assembly (involving dereferencing a pointer) that either was invalid or rasm2 didn't support, and it generated code sans the dereferencing part.
+
 ## Layout of executables and libraries
 
 Binary executable and library formats tend to contain a series of headers detailing information like versions, 16/32/64 bit, endianness, machine, linked libraries, code/data section locations, virtual memory offsets, etc. After the headers or (maybe) in between are code/data section and other data like resources etc.
@@ -68,6 +70,8 @@ Typically used on Linux is the **Executable** and **Linkable** file **Format (EL
 An excellent resource for the **PE** file format is [The Portable Executable File Format from Top to Bottom by Randy Kath](http://www.csn.ul.ie/~caolan/pub/winresdump/winresdump/doc/pefile2.html) [(archived)](https://archive.is/uwMRp).
 
 Some information on the **ELF** file format can be [found here](http://www.bottomupcs.com/elf.xhtml)
+
+Information about the headers can be found using [rabin2](https://radare.gitbooks.io/radare2book/content/rabin2/intro.html) (e.g. ```rabin2 -H binary```).
 
 ## Endianness
 
@@ -83,13 +87,15 @@ Be aware that function calls will push the return address onto the stack, you wi
 
 Another thing you might see is the stack being modfied like ```add esp,0xfffffff8```, this is just using the unsigned integer overflow where it wraps around, it is the same as ```sub esp,0x8```.
 
-## Executable start address
+## Virtual addresses
 
-Certain disassemblers output the memory address next to the disassembled instructions. Some incorrectly start at ```0x0``` and others like **objdump** give the correct address used at runtime.
+Disassemblers usually output the memory address of each disassembled instruction, but they vary on the starting address offset. They either use the physical address starting at ```0x0``` as would a hex editor, or they start at the section's virtual address that the code is under.
 
-For example X86 32-bit executables (I believe) should start at ```0x8048000```.
+The virtual address which is where an instruction will be located at runtime (at least for executables, not sure about how it works for shared libraries), and each code section has its own virtual adress offset. To find an instruction's location in a hex editor given the virtual addresss you will need to calculate it like so:
 
-Also hex editors usually start at ```0x0```, so you may need to subtract for example ```0x8048000``` from an instruction's address to find it in the hex editor.
+```virtual address - section_virtual_address + section_physical_address```
+
+To get the ```section virtual address`` and ```section physical address``` you can use ```rabin2 -S binaryfile```.
 
 ## Global variables
 
@@ -129,6 +135,8 @@ Some resources:
 ## Inserting instructions
 
 The easiest way to reverse engineer a binary is to replicate the code bit by bit (usually starting with the main function) in your own shared library. You then load the shared library from the binary at runtime.
+
+To find the main function you can either search for "main" with the disassembled executable, or use ```rabin2 -M exefile```.
 
 The [OpenRCT](https://openrct2.org/) project [used](http://archive.is/SDuL0) a program called [CFF Explorer](http://www.ntcore.com/exsuite.php) to load their own DLL. But I am unaware of a similar project for Linux, so I will show you how to modify the binary to load your own shared library and call a function from it. I will be using the ```dlopen``` and ```dlsym``` functions, which your binary will need to have available (accessible from the executable). There is probably a way to load them if they are not there, but I do not know how.
 
