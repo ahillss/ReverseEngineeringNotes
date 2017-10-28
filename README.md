@@ -91,11 +91,11 @@ Another thing you might see is the stack being modfied like ```add esp,0xfffffff
 
 Disassemblers usually output the memory address of each disassembled instruction, but they vary on the starting address offset. They either use the physical address starting at ```0x0``` as would a hex editor, or they start at the section's virtual address that the code is under.
 
-The virtual address which is where an instruction will be located at runtime (at least for executables, not sure about how it works for shared libraries), and each code section has its own virtual adress offset. To find an instruction's location in a hex editor given the virtual addresss you will need to calculate it like so:
+The virtual address is where an instruction will be located at runtime (at least for executables, not sure about how it works for shared libraries). Each code section has its own virtual address offset. To find an instruction's location in a hex editor given the virtual addresss you will need to calculate it like so:
 
 ```virtual address - section_virtual_address + section_physical_address```
 
-To get the ```section virtual address`` and ```section physical address``` you can use ```rabin2 -S binaryfile```.
+To get the ```section virtual address``` and ```section physical address``` you can use ```rabin2 -S binaryfile```.
 
 ## Global variables
 
