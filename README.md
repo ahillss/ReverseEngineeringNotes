@@ -8,7 +8,7 @@ Not really a guide, but a listing of each of the problems in no particular order
 
 To modify the binary files you will need a hex editor.
 
-A good one is [HT](https://github.com/sebastianbiallas/ht) which comes with a builtin disassembler where you can see the assembly representation of the hex code as you type. It also allows you to view the executable/library file headers, but the virtual address seems to be off compared to what is outputted from other tools.
+A good one is [HT](https://github.com/sebastianbiallas/ht) which comes with a builtin disassembler where you can see the assembly representation of the hex code as you type. It also allows you to view the executable/library file headers (though the virtual address you get from the header part seems to be off compared to what is outputted from other tools).
 
 Note like many other disassemblers, HT's one also runs on the whole file, disassembling not only the code, but also incorrectly on the header, data etc as well.
 
@@ -53,7 +53,7 @@ GDB uses the AT&T syntax, some useful commands are:
 * ```frame 0``` - change frame to the integer provided
 * ```bt``` - a stack trace
 
-## Calculating hex for instructions
+## Generating hex for instructions
 
 To modify a binary using a hex editor, you will need to know the hex codes for each instruction. This can be done using [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from the [Radare](https://radare.org) collection of disassembly tools.
 
