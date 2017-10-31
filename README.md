@@ -12,7 +12,7 @@ A good one is [HT](https://github.com/sebastianbiallas/ht) which comes with a bu
 
 Note like many other disassemblers, HT's one also runs on the whole file, disassembling not only the code, but also incorrectly on the header, data etc as well.
 
-There is also [beye](http://beye.sourceforge.net) which also has a disassembler but frequently crashes.
+Some others also with disassembler are [beye](http://beye.sourceforge.net) (frequently crashes for me) and [Hiew](http://www.hiew.ru) (windows only, not free).
 
 When modifying binary files, you cannot change the file size or move around blocks of instructions, as it will throw off memory offsets used in the instructions.
 
