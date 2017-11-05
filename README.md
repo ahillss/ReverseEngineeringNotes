@@ -65,16 +65,19 @@ Something to be aware, I had some trouble where entered assembly (involving dere
 
 Binary executable and library formats tend to contain a series of headers detailing information like versions, 16/32/64 bit, endianness, machine, linked libraries, code/data section locations, virtual memory offsets, etc. After the headers or (maybe) in between are code/data section and other data like resources etc.
 
+Information about the headers can be found using [rabin2](https://radare.gitbooks.io/radare2book/content/rabin2/intro.html) (e.g. ```rabin2 -H binary```).
+
 Typically used on Linux is the **Executable** and **Linkable** file **Format (ELF)** and on Windows the **Portable Executable (PE)** file format.
 
-* excellent resource for the **PE** file format is [The Portable Executable File Format from Top to Bottom](http://www.csn.ul.ie/~caolan/pub/winresdump/winresdump/doc/pefile2.html) [(archived)](https://archive.is/uwMRp)
+### PE
 
-* [microsoft resource](https://msdn.microsoft.com/en-us/library/ms809762.aspx) [(archived)](https://archive.is/Q2mx4) for the **PE** file format
+* [The Portable Executable File Format from Top to Bottom](http://www.csn.ul.ie/~caolan/pub/winresdump/winresdump/doc/pefile2.html) [(archived)](https://archive.is/uwMRp)
+* [x86 Disassembly/Windows Executable Files](https://en.wikibooks.org/wiki/X86_Disassembly/Windows_Executable_Files) [(archived)](https://archive.is/Awq16)
+* [Peering Inside the PE: A Tour of the Win32 Portable Executable File Format](https://msdn.microsoft.com/en-us/library/ms809762.aspx) [(archived)](https://archive.is/Q2mx4)
 
-* [decent resource](http://www.cirosantilli.com/elf-hello-world) [(archived)](https://archive.is/Dfzk6) on the **ELF** file format
-Some information  can be [found here](http://www.bottomupcs.com/elf.xhtml)
+### ELF
 
-Information about the headers can be found using [rabin2](https://radare.gitbooks.io/radare2book/content/rabin2/intro.html) (e.g. ```rabin2 -H binary```).
+* [ELF Hello World Tutorial](http://www.cirosantilli.com/elf-hello-world) [(archived)](https://archive.is/Dfzk6)
 
 ## Endianness
 
