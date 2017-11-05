@@ -67,9 +67,12 @@ Binary executable and library formats tend to contain a series of headers detail
 
 Typically used on Linux is the **Executable** and **Linkable** file **Format (ELF)** and on Windows the **Portable Executable (PE)** file format.
 
-An excellent resource for the **PE** file format is [The Portable Executable File Format from Top to Bottom](http://www.csn.ul.ie/~caolan/pub/winresdump/winresdump/doc/pefile2.html) [(archived)](https://archive.is/uwMRp).
+* excellent resource for the **PE** file format is [The Portable Executable File Format from Top to Bottom](http://www.csn.ul.ie/~caolan/pub/winresdump/winresdump/doc/pefile2.html) [(archived)](https://archive.is/uwMRp)
 
-Some information on the **ELF** file format can be [found here](http://www.bottomupcs.com/elf.xhtml)
+* [microsoft resource](https://msdn.microsoft.com/en-us/library/ms809762.aspx) [(archived)](https://archive.is/Q2mx4) for the **PE** file format
+
+* [decent resource](http://www.cirosantilli.com/elf-hello-world) [(archived)](https://archive.is/Dfzk6) on the **ELF** file format
+Some information  can be [found here](http://www.bottomupcs.com/elf.xhtml)
 
 Information about the headers can be found using [rabin2](https://radare.gitbooks.io/radare2book/content/rabin2/intro.html) (e.g. ```rabin2 -H binary```).
 
