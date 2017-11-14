@@ -95,9 +95,9 @@ Another thing you might see is the stack being modfied like ```add esp,0xfffffff
 
 ## Virtual addresses
 
-If your disassemblers outputs the instruction memory addresses (like objdump), then they will either use the physical address (starting at ```0x0```), or the virtual address (the locations of instructions at runtime).
+If your disassembler outputs the instruction memory addresses (like objdump), then they will either use the physical address (starting at ```0x0```), or the virtual address (the locations of instructions at runtime).
 
-As hex editors usually use the physically locations, then you will have have to convert from virtual addresses to physical addresses to make modifications, like so:
+As hex editors usually use the physically locations, then you will have have to convert from virtual addresses to physical addresses to make modifications:
 
 ```virtual_address - section_virtual_address + section_physical_address```
 
