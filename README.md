@@ -83,7 +83,7 @@ Typically used on Linux is the **Executable** and **Linkable** file **Format (EL
 
 Important for when looking at the hex, as you maybe confused by the order it appears. Your binaries are most likely using little-endian (what Intel CPUs use).
 
-For example in little-endian the integer ```54233456``` (or as hex ```0x33b8970```) will be stored as 4 bytes in this order ```0x70 0x89 0x3b 0x03```.
+For example in little-endian the integer ```54233456``` show as hex here ```0x33b8970``` will be stored as 4 bytes in this order ```0x70 0x89 0x3b 0x03```.
 
 ## Stacks and Alignment
 
