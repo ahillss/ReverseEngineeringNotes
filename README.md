@@ -117,7 +117,7 @@ The register ebx is usually used as an offset to them.
 8051b0b:	53                   	push   ebx
 8051b0c:	e8 00 00 00 00       	call   8051b11
 8051b11:	5b                   	pop    ebx ;get current address
-8051b12:	81 c3 03 36 03 00    	add    ebx,0x33603 ;add constant to ebx to get the absolute address for global data ...
+8051b12:	81 c3 03 36 03 00    	add    ebx,0x33603 ;add constant to get address to global data
 ...
 805217b:	8b 83 2c 02 00 00    	mov    eax,DWORD PTR [ebx+0x22c] ;a global variable
  -...
@@ -129,7 +129,7 @@ The register ebx is usually used as an offset to them.
 80527e2:	c3                   	ret    
 ```
 
-* ```[ebx-value]``` seem to refer to constants and ```[ebx+value]``` seem to refer to global variables, I don't know if this is the same everywhere all the time though.
+* ```[ebx-value]``` seem to refer to constants and ```[ebx+value]``` to global variables, I don't know if this is the same everywhere all the time though.
 * the line ```call 8051b11``` pushes the ```eip``` value on to the stack and calls the next line ```pop ebx``` where it is popped off into the ebx register.
 
 Also note that decompiled source code (from **ida**) will often use a ```global``` variable. Which doesn't actually refer to the pointer value stored in```ebx``` as you would assume, but rather ```ebx + offset```. I do not know how the offset is calculated or what the significance of it is.
