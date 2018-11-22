@@ -152,17 +152,19 @@ Some resources:
 
 The easiest way to reverse engineer a binary is to replicate the code bit by bit (usually starting with the main function) in your own shared library. You then load the shared library from the binary.
 
-To find the main function you can either search for "main" within the disassembled executable, or use ```rabin2 -M exefile``` (to get the physical and virtual addresses).
+### Finding the main function
 
-#### Adding another code section
+You can either search for "main" within the disassembled executable, or use ```rabin2 -M exefile``` (to get the physical and virtual addresses). Any tool that displays the header information of an executable should be able help you find the executing starting point of the code.
+
+### Adding another code section
 
 I've read that you can modify the ELF/PE header to add another code section to the binary file and then add a jump instruction from the main function to it. 
 
 To edit PE files there is [CFF Explorer](http://www.ntcore.com/exsuite.php).
 
-#### Add a shared library example
+### Shared Library example
 
-What I did was make some room for my code in the binary by NOP-ing out unimportant code (that was easy to replicated in my shared library or commandline handling code) and then inserting my own code to load a shared library and call a function from it.
+What I did was make some room for my code by NOP-ing out unimportant code that was easy to replicated in my shared library and then inserting my own code to load a shared library and call a function from it.
 
 I used the ```dlopen``` and ```dlsym``` functions, which your binary will need to have available (accessible from the executable). There is probably a way to load them if they are not there, but I do not know how.
 
