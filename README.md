@@ -12,9 +12,11 @@ A good one is [HT](https://github.com/sebastianbiallas/ht) which comes with a bu
 
 Note like many other disassemblers, HT's one also runs on the whole file, disassembling not only the code, but also incorrectly on the header, data etc as well.
 
-Some others also with disassembler are [beye](http://beye.sourceforge.net) (frequently crashes for me) and [Hiew](http://www.hiew.ru) (windows only, not free).
+When modifying binary files, you cannot move around blocks of instructions, as it will throw off memory offsets used in the instructions.
 
-When modifying binary files, you cannot change the file size or move around blocks of instructions, as it will throw off memory offsets used in the instructions.
+Another really good one that I've discovered recently and runs on both linux and windows is [Cutter](https://github.com/radareorg/cutter) which provides a GUI interface to [Radare2](https://radare.org/r). It also shows the disassembly but also allows you to edit the instructions where it writes the hex changes for you. One draw back is that it doesn't seem to want to let you see the hex for non code parts of the file and also the hex codes aren't side by side the dissasembly which makes it slightly harder to see what you are doing when making changes, even though you can bring up a second window to show the hex.
+
+For windows I've been recently using [HxD](https://mh-nexus.de/en/hxd/) which has a neat side bar showing various decoding of selected hex as int16/32/64, float, disassembly16/32/64 etc.
 
 ## Disassembler
 
@@ -144,7 +146,9 @@ The easiest way to reverse engineer a binary is to replicate the code bit by bit
 
 To find the main function you can either search for "main" within the disassembled executable, or use ```rabin2 -M exefile``` (to get the physical and virtual addresses).
 
-The [OpenRCT](https://openrct2.org/) project [used](http://archive.is/SDuL0) a program called [CFF Explorer](http://www.ntcore.com/exsuite.php) to load their own DLL. But I am unaware of a similar project for Linux, so I will show you how to modify the binary to load your own shared library and call a function from it. I will be using the ```dlopen``` and ```dlsym``` functions, which your binary will need to have available (accessible from the executable). There is probably a way to load them if they are not there, but I do not know how.
+The [OpenRCT](https://openrct2.org/) project [used](http://archive.is/SDuL0) a program called [CFF Explorer](http://www.ntcore.com/exsuite.php) to load their own DLL.
+
+But I am unaware of a similar project for Linux, so I will show you how to modify the binary to load your own shared library and call a function from it. I will be using the ```dlopen``` and ```dlsym``` functions, which your binary will need to have available (accessible from the executable). There is probably a way to load them if they are not there, but I do not know how.
 
 The equivalent code in C will look like this:
 
