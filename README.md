@@ -164,7 +164,7 @@ To edit PE files there is [CFF Explorer](http://www.ntcore.com/exsuite.php).
 
 ### Shared Library example
 
-What I did was make some room for my code by NOP-ing out unimportant code that was easy to replicated in my shared library and then inserting my own code to load a shared library and call a function from it.
+What I did was make some room for my code by NOP-ing out unimportant code that was easy to replicated in my shared library and then inserting my own code to load that shared library and call a function from it.
 
 I used the ```dlopen``` and ```dlsym``` functions, which your binary will need to have available (accessible from the executable). There is probably a way to load them if they are not there, but I do not know how.
 
