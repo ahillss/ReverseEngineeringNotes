@@ -10,19 +10,19 @@ To modify the binary files you will need a hex editor.
 
 Note when modifying binary files, you cannot move around blocks of instructions, as it will throw off memory offsets used in the instructions.
 
-### [HT](https://github.com/sebastianbiallas/ht)
+#### [HT](https://github.com/sebastianbiallas/ht)
 
 Comes with a builtin disassembler where you can see the assembly representation of the hex code as you type. It also allows you to view the executable/library file headers (though the virtual address you get from the header part seems to be off compared to what is outputted from other tools).
 
 Note like many other disassemblers, HT's one also runs on the whole file, disassembling not only the code, but also incorrectly on the header, data etc as well so you will need to jump to the code section you intend to modify/view.
 
-### [Cutter](https://github.com/radareorg/cutter)
+#### [Cutter](https://github.com/radareorg/cutter)
 
 Provides a GUI interface to [Radare2](https://radare.org/r). Shows the disassembly but also allows you to edit those instructions and will write the hex changes for you. 
 
 One draw back is that it doesn't seem to want to let you see the hex for non code parts of the file and also the hex codes aren't side by side the dissasembly which makes it slightly harder to see what you are doing when making changes, even though you can bring up a second window to show the hex.
 
-### [HxD](https://mh-nexus.de/en/hxd/)
+#### [HxD](https://mh-nexus.de/en/hxd/)
 
 For windows only, it has a neat side bar showing various decoding of any selected hex as int16/32/64, float, disassembly16/32/64 etc.
 
@@ -150,13 +150,21 @@ Some resources:
 
 ## Inserting instructions
 
-The easiest way to reverse engineer a binary is to replicate the code bit by bit (usually starting with the main function) in your own shared library. You then load the shared library from the binary at runtime.
+The easiest way to reverse engineer a binary is to replicate the code bit by bit (usually starting with the main function) in your own shared library. You then load the shared library from the binary.
 
 To find the main function you can either search for "main" within the disassembled executable, or use ```rabin2 -M exefile``` (to get the physical and virtual addresses).
 
-The [OpenRCT](https://openrct2.org/) project [used](http://archive.is/SDuL0) a program called [CFF Explorer](http://www.ntcore.com/exsuite.php) to load their own DLL.
+#### Adding another code section
 
-But I am unaware of a similar project for Linux, so I will show you how to modify the binary to load your own shared library and call a function from it. I will be using the ```dlopen``` and ```dlsym``` functions, which your binary will need to have available (accessible from the executable). There is probably a way to load them if they are not there, but I do not know how.
+I've read that you can modify the ELF/PE header to add another code section to the binary file and then add a jump instruction from the main function to it. 
+
+To edit PE files there is [CFF Explorer](http://www.ntcore.com/exsuite.php).
+
+#### Add a shared library example
+
+What I did was make some room for my code in the binary by NOP-ing out unimportant code (that was easy to replicated in my shared library or commandline handling code) and then inserting my own code to load a shared library and call a function from it.
+
+I used the ```dlopen``` and ```dlsym``` functions, which your binary will need to have available (accessible from the executable). There is probably a way to load them if they are not there, but I do not know how.
 
 The equivalent code in C will look like this:
 
@@ -245,8 +253,6 @@ Disassembly of section .plt:
 8051517:	e9 90 f7 ff ff       	jmp    8050cac <_init@@Base+0x30>
 
 ```
-
-You will need to make room for your code in the binary. One strategy is to overwrite a section of code that is easy to replicate in your shared library. The second strategy is to overwrite a section of code that won't be missed like  *command line options* handling code, while hard coding in any options you need to use in the binary or your shared library.
 
 ## C++ References
 
