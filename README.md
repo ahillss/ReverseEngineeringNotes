@@ -65,9 +65,7 @@ GDB uses the AT&T syntax, some useful commands are:
 
 To modify a binary using a hex editor, you will need to know the hex codes for each instruction. This can be done using [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from the [Radare](https://radare.org) collection of disassembly tools.
 
-e.g. to call a function at ```0x8050e3c``` from address ```0x8051cee``` you would use ```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'``` to generate the hex ```e8 49 f1 ff ff```.
-
-Something to be aware, I had some trouble where entered assembly (involving dereferencing a pointer) that either was invalid or rasm2 didn't support, and it generated code sans the dereferencing part.
+For example to call a function at ```0x8050e3c``` from address ```0x8051cee``` you would use ```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'``` to generate the hex ```e8 49 f1 ff ff```.
 
 ## Layout of executables and libraries
 
