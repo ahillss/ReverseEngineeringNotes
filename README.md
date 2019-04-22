@@ -30,9 +30,7 @@ For windows only, it has a neat side bar showing various decoding of any selecte
 
 To convert the binary representation of the instructions back into assembly. 
 
-Two good free ones are:
 * objdump from [binutils](https://www.gnu.org/software/binutils) (e.g. ```objdump -M intel -S -D -z binary_file > dump.asm```)
-* [borg](http://www.caesum.com) for win32 binaries
 
 Note that the disassembled assembly cannot be used with an assembler due to the data sections being interpreted as instructions and also disassemblers sometimes insert extra information or instructions that aren't always valid assembly but are useful for the user.
 
