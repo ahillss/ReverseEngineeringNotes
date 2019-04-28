@@ -42,7 +42,7 @@ Note for the PE format it fails to retrieve any symbols (e.g. function names etc
 
 ```radare2 -q -e scr.color=false -e asm.cmt.right=true -c 'b $SS ; pD $SS@$S' binary_file > dump.asm```
 
-Note not sure this is the correct usage, seems to dump the ```.text``` section.
+Note not sure this is the correct usage but seems to correctly dump the ```.text``` section.
 
 ## Decompiler
 
