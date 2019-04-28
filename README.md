@@ -156,7 +156,7 @@ You can either search for "main" within the disassembled executable, or use ```r
 
 I've read that you can modify the ELF/PE header to add another code section to the binary file and then add a jump instruction from the main function to it. 
 
-To edit PE files there is [CFF Explorer](http://www.ntcore.com/exsuite.php).
+[CFF Explorer](http://www.ntcore.com/exsuite.php) supposed to be able do the PE format (I still haven't got it working).
 
 [Radare2](https://radare.org/) should be able to do it for both the PE and ELF formats.
 
