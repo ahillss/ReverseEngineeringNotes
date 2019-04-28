@@ -30,7 +30,9 @@ For windows only, it has a neat side bar showing various decoding of any selecte
 
 To convert the binary representation of the instructions back into assembly. 
 
-### objdump from [binutils](https://www.gnu.org/software/binutils) 
+### objdump
+
+From [binutils](https://www.gnu.org/software/binutils).
 
 ```objdump -M intel -S -D -z binary_file > dump.asm```
 
