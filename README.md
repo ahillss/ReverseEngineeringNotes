@@ -18,7 +18,7 @@ Note like many other disassemblers, HT's one also runs on the whole file, disass
 
 ### [Cutter](https://github.com/radareorg/cutter)
 
-Provides a GUI interface to [Radare2](https://radare.org/r). Shows the disassembly but also allows you to edit those instructions and will write the hex changes for you. 
+Provides a GUI interface to [Radare2](https://radare.org). Shows the disassembly but also allows you to edit those instructions and will write the hex changes for you. 
 
 One draw back is that it doesn't seem to want to let you see the hex for non code parts of the file. Also the hex codes aren't side by side the dissasembly which makes it slightly harder to see what you are doing when making changes, though you can bring up a second window to show the hex.
 
@@ -32,7 +32,7 @@ To convert the binary representation of the instructions back into assembly.
 
 * objdump from [binutils](https://www.gnu.org/software/binutils) (e.g. ```objdump -M intel -S -D -z binary_file > dump.asm```)
 
-Note that the disassembled assembly cannot be used with an assembler due to the data sections being interpreted as instructions and also disassemblers sometimes insert extra information or instructions that aren't always valid assembly but are useful for the user.
+* radare2 (e.g. ```radare2 -q -e scr.color=false -e asm.cmt.right=true -c 'b $SS ; pD $SS@$S' binary_file > dump.asm```, (probably correct))
 
 ## Decompiler
 
