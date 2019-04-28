@@ -63,7 +63,7 @@ GDB uses the AT&T syntax, some useful commands are:
 
 ## Generating hex for instructions
 
-To modify a binary using a hex editor, you will need to know the hex codes for each instruction. This can be done using [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from the [Radare](https://radare.org) collection of disassembly tools.
+To modify a binary using a hex editor, you will need to know the hex codes for each instruction. This can be done using [rasm2](https://github.com/radare/radare2/wiki/Rasm2) from the [Radare2](https://radare.org) collection of disassembly tools.
 
 For example to call a function at ```0x8050e3c``` from address ```0x8051cee``` you would use ```rasm2 -o 0x8051cee -a x86 -b 32 'call 0x8050e3c'``` to generate the hex ```e8 49 f1 ff ff```.
 
@@ -157,6 +157,8 @@ You can either search for "main" within the disassembled executable, or use ```r
 I've read that you can modify the ELF/PE header to add another code section to the binary file and then add a jump instruction from the main function to it. 
 
 To edit PE files there is [CFF Explorer](http://www.ntcore.com/exsuite.php).
+
+[Radare2](https://radare.org/) should be able to do it for both the PE and ELF formats.
 
 ### Shared Library example
 
