@@ -4,7 +4,7 @@ Not really a guide, but a listing of each of the problems in no particular order
 
 *Note: this is a work in progress.*
 
-## Hex editor
+## (Hex) Editors
 
 To modify the binary files you will need a hex editor.
 
@@ -30,9 +30,17 @@ For windows only, it has a neat side bar showing various decoding of any selecte
 
 To convert the binary representation of the instructions back into assembly. 
 
-* objdump from [binutils](https://www.gnu.org/software/binutils) (e.g. ```objdump -M intel -S -D -z binary_file > dump.asm```)
+### objdump from [binutils](https://www.gnu.org/software/binutils) 
 
-* radare2 (e.g. ```radare2 -q -e scr.color=false -e asm.cmt.right=true -c 'b $SS ; pD $SS@$S' binary_file > dump.asm```, (probably correct))
+```objdump -M intel -S -D -z binary_file > dump.asm```
+
+Note for the PE format it fails to retrieve any symbols (e.g. function names etc)
+
+### radare2
+
+```radare2 -q -e scr.color=false -e asm.cmt.right=true -c 'b $SS ; pD $SS@$S' binary_file > dump.asm```
+
+Note not sure this is the correct usage, seems to dump the ```.text``` section.
 
 ## Decompiler
 
