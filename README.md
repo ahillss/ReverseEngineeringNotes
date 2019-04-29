@@ -4,7 +4,7 @@ Not really a guide, but a listing of each of the problems in no particular order
 
 *Note: this is a work in progress.*
 
-## (Hex) Editors
+## (Hex) Editor
 
 To modify the binary files you will need a hex editor.
 
