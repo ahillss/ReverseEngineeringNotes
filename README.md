@@ -1,6 +1,6 @@
-# Reverse Engineering Guide
+# Reverse Engineering Notes
 
-Not really a guide, but a listing of each of the problems in no particular order that I had to go through when learning to reverse engineer C++ code compiled to 32-bit X86 assembly.
+List of the problems in no particular order that I had to go through when learning to reverse a binary compiled in C++ and disassembled to 32-bit X86 assembly.
 
 *Note: this is a work in progress.*
 
