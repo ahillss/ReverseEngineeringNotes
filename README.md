@@ -34,21 +34,21 @@ To convert the binary representation of the instructions back into assembly.
 
 From [binutils](https://www.gnu.org/software/binutils).
 
-```objdump -M intel -S -D -z binary_file > dump.asm```
-
-Note for the PE format it fails to retrieve any symbols (e.g. function names etc)
+* ```objdump -M intel -S -D -z binary_file > dump.asm```
+* for the PE format it fails to retrieve any symbols (e.g. function names etc)
 
 ### radare2
 
-```radare2 -q -e scr.color=false -e asm.cmt.right=true -c 'b $SS ; pD $SS@$S' binary_file > dump.asm```
-
-Note not sure this is the correct usage but seems to correctly dump the ```.text``` section.
+* ```radare2 -q -e scr.color=false -e asm.cmt.right=true -c 'b $SS ; pD $SS@$S' binary_file > dump.asm```
+* * not sure this is the correct usage but seems to correctly dump the ```.text``` section.
 
 ## Decompiler
 
-Reading vast amounts of code from the disassembly can be difficult, a decompiler can make that job much easier, especially for following control flow. It can also be useful for identifying global variables and the virtual tables of classes. A good one is [IDA](https://www.hex-rays.com/products/ida/).
-
-The C/C++ source generated will not have completely valid syntax (as extra information is inserted) and will often be missing type information (except for their byte sizes).
+* helps to give a general idea of parts of the code
+* helps for understanding the control flow of the code
+* useful for identifying global variables and the virtual tables of classes
+* a good one is [IDA](https://www.hex-rays.com/products/ida/)
+* the C/C++ source generated will not have completely valid syntax (as extra information is inserted) and will often be missing type information (except for their byte sizes)
 
 ## Learning assembly
 
