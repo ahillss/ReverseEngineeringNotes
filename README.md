@@ -6,25 +6,25 @@ List of the problems in no particular order that I had to go through when learni
 
 ## (Hex) Editor
 
-To modify the binary files you will need a hex editor.
-
 Note when modifying binary files, you cannot move around blocks of instructions, as it will throw off memory offsets used in the instructions.
 
 ### [HT](https://github.com/sebastianbiallas/ht)
 
-Comes with a builtin disassembler where you can see the assembly representation of the hex code as you type. It also allows you to view the executable/library file headers (though the virtual address you get from the header part seems to be off compared to what is outputted from other tools).
-
-Note like many other disassemblers, HT's one also runs on the whole file, disassembling not only the code, but also incorrectly on the header, data etc as well so you will need to jump to the code section you intend to modify/view.
+* builtin disassembler where you can see the assembly representation of the hex code as you type
+* allows you to view the executable/library file headers (though the virtual address you get from the header part seems to be off compared to what is outputted from other tools)
+* note like many other disassemblers, HT's one also runs on the whole file, disassembling not only the code, but also incorrectly on the header, data etc as well so you will need to jump to the code section you intend to modify/view
 
 ### [Cutter](https://github.com/radareorg/cutter)
 
-Provides a GUI interface to [Radare2](https://radare.org). Shows the disassembly but also allows you to edit those instructions and will write the hex changes for you. 
-
-One draw back is that it doesn't seem to want to let you see the hex for non code parts of the file. Also the hex codes aren't side by side the dissasembly which makes it slightly harder to see what you are doing when making changes, though you can bring up a second window to show the hex.
+* provides a GUI interface to [Radare2](https://radare.org).
+* shows the disassembly but also allows you to edit those instructions and will write the hex changes for you
+* doesn't seem to want to let you see the hex for non code parts of the file
+* hex codes aren't side by side the dissasembly which makes it slightly harder to see what you are doing when making changes, though you can bring up a second window to show the hex
 
 ### [HxD](https://mh-nexus.de/en/hxd/)
 
-For windows only, it has a neat side bar showing various decoding of any selected hex as int16/32/64, float, disassembly16/32/64 etc.
+* windows only
+* has a neat side bar showing various decoding of any selected hex as int16/32/64, float, disassembly16/32/64 etc.
 
 ## Disassembler
 
