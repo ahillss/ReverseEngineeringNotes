@@ -44,11 +44,10 @@ From [binutils](https://www.gnu.org/software/binutils).
 
 ## Decompiler
 
-* helps to give a general idea of parts of the code
-* helps for understanding the control flow of the code
+* helps to give a general idea and control flow of the program/disassembly
 * useful for identifying global variables and the virtual tables of classes
 * a good one is [IDA](https://www.hex-rays.com/products/ida/)
-* the C/C++ source generated will not have completely valid syntax (as extra information is inserted) and will often be missing type information (except for their byte sizes)
+* generated code will not have completely valid syntax (as extra information is inserted) and will often be missing type information (except for their byte sizes)
 
 ## Learning assembly
 
