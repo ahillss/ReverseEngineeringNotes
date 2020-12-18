@@ -12,7 +12,7 @@ Note when modifying binary files, you cannot move around blocks of instructions,
 
 * builtin disassembler where you can see the assembly representation of the hex code as you type
 * allows you to view the executable/library file headers (though the virtual address you get from the header part seems to be off compared to what is outputted from other tools)
-* like many other disassemblers, disassembles not only the code, but also incorrectly on the header, data etc so you will need to know where the code section is
+* like many other disassemblers the whole file is disassembled (e.g. header, data, code etc) so you will need to know where the code section is
 
 ### [Cutter](https://github.com/radareorg/cutter)
 
