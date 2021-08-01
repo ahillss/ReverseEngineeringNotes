@@ -6,7 +6,7 @@ List of the problems in no particular order that I had to go through when learni
 
 ## (Hex) Editor
 
-Note when modifying binary files, you cannot move around blocks of instructions, as it will throw off memory offsets used in the instructions.
+* when editing instructions, blocks of instructions cannot be just moved around because memory offsets used to refer to locations within the program will be made invalid
 
 ### [HT](https://github.com/sebastianbiallas/ht)
 
