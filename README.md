@@ -13,6 +13,8 @@ List of the problems in no particular order that I had to go through when learni
 * builtin disassembler where you can see the assembly representation of the hex code as you type
 * allows you to view the executable/library file headers (the virtual address offset you get from the header part may be different from other tools)
 * like many other disassemblers the whole file is disassembled (e.g. header, data, code etc) so you will need to know where the code section is
+* there also is [beye](http://beye.sourceforge.net) which is very similar to ht, but frequently crashes.
+
 
 ### [Cutter](https://github.com/radareorg/cutter)
 
