@@ -8,7 +8,7 @@ List of the problems in no particular order that I had to go through when learni
 
 * when editing instructions, blocks of instructions cannot be just moved around because memory offsets used to refer to locations within the program will be made invalid
 
-### [HT](https://github.com/sebastianbiallas/ht)
+### [HT Editor](https://github.com/sebastianbiallas/ht)
 
 * builtin disassembler where you can see the assembly representation of the hex code as you type
 * allows you to view the executable/library file headers (the virtual address offset you get from the header part may be different from other tools)
