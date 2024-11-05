@@ -6,22 +6,21 @@ List of the problems in no particular order that I had to go through when learni
 
 ## (Hex) Editor
 
-* when editing instructions, blocks of instructions cannot be just moved around because memory offsets used to refer to locations within the program will be made invalid
+* when editing instructions, cannot just move instructions around, as some may rely on memory offsets, rendering them invalid.
 
 ### [HT Editor](https://github.com/sebastianbiallas/ht)
 
 * builtin disassembler where you can see the assembly representation of the hex code as you type
-* allows you to view the executable/library file headers (the virtual address offset you get from the header part may be different from other tools)
+* can view the executable/library file headers (the virtual address offset you get from the header part may be different from other tools)
 * like many other disassemblers the whole file is disassembled (e.g. header, data, code etc) so you will need to know where the code section is
 * there also is [beye](http://beye.sourceforge.net) which is very similar to ht, but frequently crashes.
-
 
 ### [Cutter](https://github.com/radareorg/cutter)
 
 * provides a GUI interface to [Radare2](https://radare.org).
 * shows the disassembly but also allows you to edit those instructions and will write the hex changes for you
 * doesn't seem to want to let you see the hex for non code parts of the file
-* hex codes aren't side by side the dissassembly, though you can bring up a second window to show the hex
+* hex codes aren't side by side with the dissassembly, though you can bring up a second window to show the hex
 
 ### [HxD](https://mh-nexus.de/en/hxd/)
 
@@ -49,11 +48,11 @@ From [binutils](https://www.gnu.org/software/binutils).
 * helps to give a general idea and control flow of the program/disassembly
 * useful for identifying global variables and the virtual tables of classes
 * a good one is [IDA](https://www.hex-rays.com/products/ida/)
-* generated code will not have completely valid syntax (as extra information is inserted) and will often be missing type information (except for their byte sizes)
+* generated code will not be completely valid syntax (as extra information is inserted) and will often be missing type information (except for their byte sizes)
 
 ## Learning assembly
 
-There are two main assembly styles to choose from, Intel and AT&T. I prefer Intel as it is less cluttered, but once you have learned one you can look up the [differences](http://www.imada.sdu.dk/Courses/DM18/Litteratur/IntelnATT.htm) ([archived](http://archive.is/f1dul)) and have no trouble using the other.
+There are two main assembly styles to choose from, Intel and AT&T. I prefer Intel as it is less cluttered, but once you have learned one you can look up the [differences](http://www.imada.sdu.dk/Courses/DM18/Litteratur/IntelnATT.htm) ([archived](http://archive.is/f1dul)).
 
 For Intel the book [PC Assembly Language](http://pacman128.github.io/pcasm/) by Paul A. Carter is freely available.
 
@@ -84,7 +83,7 @@ Binary executable and library formats tend to contain a series of headers detail
 
 Information about the headers can be found using [rabin2](https://radare.gitbooks.io/radare2book/content/rabin2/intro.html) (e.g. ```rabin2 -H binary```).
 
-Typically used on Linux is the **Executable** and **Linkable** file **Format (ELF)** and on Windows the **Portable Executable (PE)** file format.
+Typically Linux uses the **Executable** and **Linkable** file **Format (ELF)** and on Windows the **Portable Executable (PE)** file format.
 
 ### PE
 
@@ -106,7 +105,7 @@ For example in little-endian the integer ```54233456``` show as hex here ```0x33
 
 Depending on the compiler options used when the binary was compiled, the stack may have to be aligned to a certain amount of bytes. Aligning it to 16 bytes is usually best, but you can figured it out by looking for padding (any stack memory that was declared and cleaned up without being used).
 
-Be aware that function calls will push the return address onto the stack, you will need to remember to count them as well.
+Be aware that function calls will push the return address onto the stack, you will need to count that as well.
 
 Another thing you might see is the stack being modfied like ```add esp,0xfffffff8```, this is just using the unsigned integer overflow where it wraps around, it is the same as ```sub esp,0x8```.
 
